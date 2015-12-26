@@ -2,13 +2,8 @@
 
 // Tests for comments across pages of data;
 
-var CommentsRemover = require('../lib/remover');
-var cr = new CommentsRemover();
+var RemoveComments = require('../lib/remover');
 
 describe("Paged:", function () {
-
-    beforeEach(function () {
-        cr.reset();
-    });
 
 });

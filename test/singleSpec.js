@@ -3,25 +3,21 @@
 // Tests for single-line comments;
 
 var os = require('os');
-var CommentsRemover = require('../lib/remover');
-var cr = new CommentsRemover();
+var RemoveComments = require('../lib/remover');
 var LB = os.EOL;
 
 describe("Single:", function () {
 
     describe("empty comment", function () {
-        cr.reset();
-        var out = cr.next("//");
+        var out = RemoveComments("//");
         it("must return an empty string", function () {
             expect(out).toBe("");
         });
     });
 
     describe("multiple empty comments", function () {
-        cr.reset();
-        var out1 = cr.next("//" + LB + "//" + LB);
-        cr.reset();
-        var out2 = cr.next("//" + LB + "//");
+        var out1 = RemoveComments("//" + LB + "//" + LB);
+        var out2 = RemoveComments("//" + LB + "//");
         it("must return an empty string", function () {
             expect(out1).toBe("");
             expect(out2).toBe("");
@@ -29,18 +25,15 @@ describe("Single:", function () {
     });
 
     describe("non-empty comment", function () {
-        cr.reset();
-        var out = cr.next("// text");
+        var out = RemoveComments("// text");
         it("must return an empty string", function () {
             expect(out).toBe("");
         });
     });
 
     describe("non-empty multiple comments", function () {
-        cr.reset();
-        var out1 = cr.next("// text1" + LB + "// text2");
-        cr.reset();
-        var out2 = cr.next("// text1" + LB + "// text2" + LB);
+        var out1 = RemoveComments("// text1" + LB + "// text2");
+        var out2 = RemoveComments("// text1" + LB + "// text2" + LB);
         it("must return an empty string", function () {
             expect(out1).toBe("");
             expect(out2).toBe("");
@@ -48,38 +41,31 @@ describe("Single:", function () {
     });
 
     describe("with line-break prefix", function () {
-        cr.reset();
-        var out = cr.next(LB + "//");
+        var out = RemoveComments(LB + "//");
         it("must return the break", function () {
             expect(out).toBe(LB);
         });
     });
 
     describe("with line-break suffix", function () {
-        cr.reset();
-        var out = cr.next("//" + LB);
+        var out = RemoveComments("//" + LB);
         it("must return an empty string", function () {
             expect(out).toBe("");
         });
     });
 
     describe("with multiple line-break suffixes", function () {
-        cr.reset();
-        var out = cr.next("//" + LB + LB);
+        var out = RemoveComments("//" + LB + LB);
         it("must return a single line break", function () {
             expect(out).toBe(LB);
         });
     });
 
     describe("with preceding text", function () {
-        cr.reset();
-        var out1 = cr.next("Text//");
-        cr.reset();
-        var out2 = cr.next(LB + "Text//");
-        cr.reset();
-        var out3 = cr.next("Text" + LB + "//");
-        cr.reset();
-        var out4 = cr.next("Text//" + LB + "Here");
+        var out1 = RemoveComments("Text//");
+        var out2 = RemoveComments(LB + "Text//");
+        var out3 = RemoveComments("Text" + LB + "//");
+        var out4 = RemoveComments("Text//" + LB + "Here");
         it("must return the preceding text", function () {
             expect(out1).toBe("Text");
             expect(out2).toBe(LB + "Text");
@@ -89,12 +75,9 @@ describe("Single:", function () {
     });
 
     describe("with empty text prefix", function () {
-        cr.reset();
-        var out1 = cr.next("''//");
-        cr.reset();
-        var out2 = cr.next("\"\"//");
-        cr.reset();
-        var out3 = cr.next("``//");
+        var out1 = RemoveComments("''//");
+        var out2 = RemoveComments("\"\"//");
+        var out3 = RemoveComments("``//");
         it("must leave only the comment", function () {
             expect(out1).toBe("''");
             expect(out2).toBe("\"\"");
@@ -103,12 +86,9 @@ describe("Single:", function () {
     });
 
     describe("with empty text suffix", function () {
-        cr.reset();
-        var out1 = cr.next("//" + LB + "''");
-        cr.reset();
-        var out2 = cr.next("//" + LB + "\"\"");
-        cr.reset();
-        var out3 = cr.next("//" + LB + "``");
+        var out1 = RemoveComments("//" + LB + "''");
+        var out2 = RemoveComments("//" + LB + "\"\"");
+        var out3 = RemoveComments("//" + LB + "``");
         it("must leave only the comment", function () {
             expect(out1).toBe("''");
             expect(out2).toBe("\"\"");
@@ -117,12 +97,9 @@ describe("Single:", function () {
     });
 
     describe("with re-used opener", function () {
-        cr.reset();
-        var out1 = cr.next("'\''");
-        cr.reset();
-        var out2 = cr.next("\"\"\"");
-        cr.reset();
-        var out3 = cr.next("`\``");
+        var out1 = RemoveComments("'\''");
+        var out2 = RemoveComments("\"\"\"");
+        var out3 = RemoveComments("`\``");
         it("must leave only the comment", function () {
             expect(out1).toBe("'\''");
             expect(out2).toBe("\"\"\"");
@@ -131,8 +108,7 @@ describe("Single:", function () {
     });
 
     describe("comments inside text", function () {
-        cr.reset();
-        var out = cr.next("'//Text'");
+        var out = RemoveComments("'//Text'");
         it("must leave only the comment", function () {
             expect(out).toBe("'//Text'");
         });
@@ -140,22 +116,19 @@ describe("Single:", function () {
 
     describe("spaces", function () {
         describe("before text", function () {
-            cr.reset();
-            var out = cr.next("\t \tText");
+            var out = RemoveComments("\t \tText");
             it("must preserve the spaces", function () {
                 expect(out).toBe("\t \tText");
             });
         });
         describe("after text", function () {
-            cr.reset();
-            var out = cr.next("Text\t \t");
+            var out = RemoveComments("Text\t \t");
             it("must preserve the spaces", function () {
                 expect(out).toBe("Text\t \t");
             });
         });
         describe("complex case", function () {
-            cr.reset();
-            var out = cr.next("a // comment" + LB + "\tb // comment" + LB + "c//end");
+            var out = RemoveComments("a // comment" + LB + "\tb // comment" + LB + "c//end");
             it("must keep spaces correctly", function () {
                 expect(out).toBe("a " + LB + "\tb " + LB + "c");
             });

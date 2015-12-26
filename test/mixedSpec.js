@@ -2,13 +2,8 @@
 
 // Tests for combinations of single + multi-line comments;
 
-var CommentsRemover = require('../lib/remover');
-var cr = new CommentsRemover();
+var RemoveComments = require('../lib/remover');
 
 describe("Mixed:", function () {
-
-    beforeEach(function () {
-        cr.reset();
-    });
 
 });
