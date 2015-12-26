@@ -138,4 +138,27 @@ describe("Single:", function () {
         });
     });
 
+    describe("spaces", function () {
+        describe("before text", function () {
+            cr.reset();
+            var out = cr.next("\t \tText");
+            it("must preserve the spaces", function () {
+                expect(out).toBe("\t \tText");
+            });
+        });
+        describe("after text", function () {
+            cr.reset();
+            var out = cr.next("Text\t \t");
+            it("must preserve the spaces", function () {
+                expect(out).toBe("Text\t \t");
+            });
+        });
+        describe("complex case", function () {
+            cr.reset();
+            var out = cr.next("a // comment" + LB + "\tb // comment" + LB + "c//end");
+            it("must keep spaces correctly", function () {
+                expect(out).toBe("a " + LB + "\tb " + LB + "c");
+            });
+        });
+    });
 });
