@@ -1,6 +1,6 @@
-//a
-a
-    //b
-b
- //c
-c
+var a;
+// a
+    var b;
+    // b
+        var c;
+// c

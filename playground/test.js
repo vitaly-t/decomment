@@ -4,6 +4,7 @@ function stream(source, dest) {
     var cr = new CommentsRemover();
 
     function processData(data) {
+        //dest.write(JSON.stringify(cr.next(data)));
         dest.write(cr.next(data));
     }
 
