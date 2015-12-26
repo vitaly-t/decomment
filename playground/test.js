@@ -15,8 +15,17 @@ function stream(source, dest) {
 }
 
 var fs = require('fs');
-var s = fs.createReadStream('input.js');
+//var s = fs.createReadStream('input.js');
 //var out = fs.createWriteStream('output.js');
-s.setEncoding('utf8');
+//s.setEncoding('utf8');
 
-stream(s, process.stdout);
+//stream(s, process.stdout);
+
+fs.readFile('input.js', 'utf8', function(err, data) {
+    if (err)
+        throw err;
+    //console.log(data);
+
+    var cr = new CommentsRemover();
+    fs.writeFile("output.js", cr.next(data));
+});
