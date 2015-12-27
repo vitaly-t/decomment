@@ -24,3 +24,9 @@ $ npm run coverage
 
 ### Usage
 
+```js
+var decomment = require('decomment');
+var validCode = "var t; // comment";
+console.log(decomment(validCode));
+//=> var t;
+```
