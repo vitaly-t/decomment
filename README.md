@@ -43,4 +43,4 @@ console.log(decomment(code)); //=> var t;
 In terms of the performance, this library is as fast as it gets,
 in part because it makes no use of regular expressions.
 
-For example, it churns through the source of AngularJS 1.5 Core (1.1MB of JavaScript) in under 40ms. 
+For example, it churns through the [source of AngularJS 1.5 Core](https://code.angularjs.org/1.5.0-rc.0/) (1.1MB of JavaScript) in under 40ms. 
