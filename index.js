@@ -2,20 +2,14 @@
 
 var os = require('os');
 
-// TODO: BUG: \/* can be inside a regular expression;
-// TODO: BUG: /\/*\//;
-// TODO: BUG: ', "", ` inside regex'
-// TODO: Really, need to detect RegEx and add inRegex mode;
+function decomment(text) {
 
-// SEE: https://github.com/sindresorhus/strip-json-comments/issues/26
-// SEE: http://stackoverflow.com/questions/5519596/when-parsing-javascript-what-determines-the-meaning-of-a-slash
+    if (typeof text !== 'string') {
+        throw new TypeError("A text string was expected.");
+    }
 
-// TODO: Cut lines that are between comment blocks;
-
-function RemoveComments(text) {
-
-    if (typeof text !== 'string' || !text.length) {
-        throw new TypeError("Non-empty text string was expected.");
+    if (!text.length) {
+        return text;
     }
 
     var idx = 0, // current index;
@@ -118,4 +112,4 @@ function RemoveComments(text) {
     return s;
 }
 
-module.exports = RemoveComments;
+module.exports = decomment;

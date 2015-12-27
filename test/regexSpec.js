@@ -2,7 +2,9 @@
 
 // Tests for skipping regular expressions;
 
-var RemoveComments = require('../lib/remover');
+var decomment = require('../');
+var os = require('os');
+var LB = os.EOL;
 
 describe("RegEx:", function () {
 

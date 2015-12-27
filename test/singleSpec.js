@@ -2,22 +2,22 @@
 
 // Tests for single-line comments;
 
+var decomment = require('../');
 var os = require('os');
-var RemoveComments = require('../lib/remover');
 var LB = os.EOL;
 
 describe("Single:", function () {
 
     describe("empty comment", function () {
-        var out = RemoveComments("//");
+        var out = decomment("//");
         it("must return an empty string", function () {
             expect(out).toBe("");
         });
     });
 
     describe("multiple empty comments", function () {
-        var out1 = RemoveComments("//" + LB + "//" + LB);
-        var out2 = RemoveComments("//" + LB + "//");
+        var out1 = decomment("//" + LB + "//" + LB);
+        var out2 = decomment("//" + LB + "//");
         it("must return an empty string", function () {
             expect(out1).toBe("");
             expect(out2).toBe("");
@@ -25,15 +25,15 @@ describe("Single:", function () {
     });
 
     describe("non-empty comment", function () {
-        var out = RemoveComments("// text");
+        var out = decomment("// text");
         it("must return an empty string", function () {
             expect(out).toBe("");
         });
     });
 
     describe("non-empty multiple comments", function () {
-        var out1 = RemoveComments("// text1" + LB + "// text2");
-        var out2 = RemoveComments("// text1" + LB + "// text2" + LB);
+        var out1 = decomment("// text1" + LB + "// text2");
+        var out2 = decomment("// text1" + LB + "// text2" + LB);
         it("must return an empty string", function () {
             expect(out1).toBe("");
             expect(out2).toBe("");
@@ -41,31 +41,31 @@ describe("Single:", function () {
     });
 
     describe("with line-break prefix", function () {
-        var out = RemoveComments(LB + "//");
+        var out = decomment(LB + "//");
         it("must return the break", function () {
             expect(out).toBe(LB);
         });
     });
 
     describe("with line-break suffix", function () {
-        var out = RemoveComments("//" + LB);
+        var out = decomment("//" + LB);
         it("must return an empty string", function () {
             expect(out).toBe("");
         });
     });
 
     describe("with multiple line-break suffixes", function () {
-        var out = RemoveComments("//" + LB + LB);
+        var out = decomment("//" + LB + LB);
         it("must return a single line break", function () {
             expect(out).toBe(LB);
         });
     });
 
     describe("with preceding text", function () {
-        var out1 = RemoveComments("Text//");
-        var out2 = RemoveComments(LB + "Text//");
-        var out3 = RemoveComments("Text" + LB + "//");
-        var out4 = RemoveComments("Text//" + LB + "Here");
+        var out1 = decomment("Text//");
+        var out2 = decomment(LB + "Text//");
+        var out3 = decomment("Text" + LB + "//");
+        var out4 = decomment("Text//" + LB + "Here");
         it("must return the preceding text", function () {
             expect(out1).toBe("Text");
             expect(out2).toBe(LB + "Text");
@@ -75,9 +75,9 @@ describe("Single:", function () {
     });
 
     describe("with empty text prefix", function () {
-        var out1 = RemoveComments("''//");
-        var out2 = RemoveComments("\"\"//");
-        var out3 = RemoveComments("``//");
+        var out1 = decomment("''//");
+        var out2 = decomment("\"\"//");
+        var out3 = decomment("``//");
         it("must leave only the comment", function () {
             expect(out1).toBe("''");
             expect(out2).toBe("\"\"");
@@ -86,9 +86,9 @@ describe("Single:", function () {
     });
 
     describe("with empty text suffix", function () {
-        var out1 = RemoveComments("//" + LB + "''");
-        var out2 = RemoveComments("//" + LB + "\"\"");
-        var out3 = RemoveComments("//" + LB + "``");
+        var out1 = decomment("//" + LB + "''");
+        var out2 = decomment("//" + LB + "\"\"");
+        var out3 = decomment("//" + LB + "``");
         it("must leave only the comment", function () {
             expect(out1).toBe("''");
             expect(out2).toBe("\"\"");
@@ -97,9 +97,9 @@ describe("Single:", function () {
     });
 
     describe("with re-used opener", function () {
-        var out1 = RemoveComments("'\''");
-        var out2 = RemoveComments("\"\"\"");
-        var out3 = RemoveComments("`\``");
+        var out1 = decomment("'\''");
+        var out2 = decomment("\"\"\"");
+        var out3 = decomment("`\``");
         it("must leave only the comment", function () {
             expect(out1).toBe("'\''");
             expect(out2).toBe("\"\"\"");
@@ -108,7 +108,7 @@ describe("Single:", function () {
     });
 
     describe("comments inside text", function () {
-        var out = RemoveComments("'//Text'");
+        var out = decomment("'//Text'");
         it("must leave only the comment", function () {
             expect(out).toBe("'//Text'");
         });
@@ -116,19 +116,19 @@ describe("Single:", function () {
 
     describe("spaces", function () {
         describe("before text", function () {
-            var out = RemoveComments("\t \tText");
+            var out = decomment("\t \tText");
             it("must preserve the spaces", function () {
                 expect(out).toBe("\t \tText");
             });
         });
         describe("after text", function () {
-            var out = RemoveComments("Text\t \t");
+            var out = decomment("Text\t \t");
             it("must preserve the spaces", function () {
                 expect(out).toBe("Text\t \t");
             });
         });
         describe("complex case", function () {
-            var out = RemoveComments("a // comment" + LB + "\tb // comment" + LB + "c//end");
+            var out = decomment("a // comment" + LB + "\tb // comment" + LB + "c//end");
             it("must keep spaces correctly", function () {
                 expect(out).toBe("a " + LB + "\tb " + LB + "c");
             });
