@@ -1,7 +1,7 @@
 {
   "name": "decomment",
-  "version": "0.0.2",
-  "description": "Removes comments from JavaScript and JSON",
+  "version": "0.0.3",
+  "description": "Removes comments from JSON or JavaScript.",
   "main": "lib/index.js",
   "scripts": {
     "test": "jasmine-node test",
@@ -22,8 +22,9 @@
     "email": "vitaly.tomilov@gmail.com"
   },
   "keywords": [
-    "remove",
-    "comments"
+    "remove comments",
+    "JavaScript",
+    "JSON"
   ],
   "author": {
     "name": "Vitaly Tomilov",
