@@ -35,5 +35,6 @@ console.log(decomment(code)); //=> var t;
 ### Features
 
 * Removes both single-line and multi-line comments
+* Removes empty lines between multi-line comments
 * Can handle valid JSON or JavaScript of any size
 * Compliant with ECMAScript 6
