@@ -39,3 +39,8 @@ console.log(decomment(code)); //=> var t;
 * Removes unnecessary gaps left by comment blocks
 * Can handle valid JSON or JavaScript of any size
 * Compliant with ECMAScript 6
+
+In terms of the performance, this library is as fast as it gets,
+in part because it makes no use of regular expressions.
+
+For example, it churns through AngularJS 1.5 Core (1.1MB of JavaScript) in under 40ms. 
