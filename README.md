@@ -26,7 +26,9 @@ $ npm run coverage
 
 ```js
 var decomment = require('decomment');
-var validCode = "var t; // comment";
-console.log(decomment(validCode));
+
+var code = "var t; // comments"; // any valid JavaScript or JSON
+
+console.log(decomment(code));
 //=> var t;
 ```
