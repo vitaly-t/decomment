@@ -20,4 +20,10 @@ describe("Mixed:", function () {
         });
     });
 
+    describe("mixed comments", function () {
+        it("must be removed", function () {
+            expect(decomment("//one" + LB + "/*two*/" + LB + "//three")).toBe("");
+        });
+    });
+
 });
