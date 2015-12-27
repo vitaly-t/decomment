@@ -106,7 +106,7 @@ function decomment(text) {
                 return true; // regEx closure found;
             }
         } while (++nextIdx < l);
-        return true;
+        return false;
     }
 
     return s;
