@@ -1,6 +1,6 @@
 'use strict';
 
-var os = require('os');
+var EOL = require('os').EOL; // OS-dependent End-of-Line;
 
 function decomment(text) {
 
@@ -8,28 +8,28 @@ function decomment(text) {
         throw new TypeError("A text string was expected.");
     }
 
-    if (!text.length) {
-        return text;
-    }
-
     var idx = 0, // current index;
         s = '', // resulting text;
         len = text.length, // text length;
+        regExIdx = -1, // first possible regEx index in the current line;
         emptyLine = true, // set while no symbols encountered on the current line;
-        emptyLetters = '', // empty letters on a new line;
-        regExIdx = -1; // first possible regEx index in the current line;
+        emptyLetters = ''; // empty letters on a new line;
+
+    if (!len) {
+        return text;
+    }
 
     do {
         if (text[idx] === '/' && idx < len - 1 && (!idx || text[idx - 1] !== '\\')) {
             if (text[idx + 1] === '/') {
                 regExIdx = -1;
-                var lb = text.indexOf(os.EOL, idx + 1);
+                var lb = text.indexOf(EOL, idx + 1);
                 if (lb < 0) {
                     break;
                 }
                 if (emptyLine) {
                     emptyLetters = '';
-                    idx = lb + os.EOL.length - 1; // last symbol of the line break;
+                    idx = lb + EOL.length - 1; // last symbol of the line break;
                 } else {
                     idx = lb - 1; // just before the line break;
                 }
@@ -44,9 +44,9 @@ function decomment(text) {
                 idx = end + 1;
                 if (emptyLine) {
                     emptyLetters = '';
-                    var lb = text.indexOf(os.EOL, idx + 1);
+                    var lb = text.indexOf(EOL, idx + 1);
                     if (lb > idx) {
-                        idx = lb + os.EOL.length - 1; // last symbol of the line break;
+                        idx = lb + EOL.length - 1; // last symbol of the line break;
                     }
                 }
                 continue;
@@ -57,7 +57,7 @@ function decomment(text) {
         var symbol = text[idx];
         var isSpace = symbol === ' ' || symbol === '\t';
         if (symbol === '\r' || symbol === '\n') {
-            if (text.indexOf(os.EOL, idx) === idx) {
+            if (text.indexOf(EOL, idx) === idx) {
                 emptyLine = true;
                 regExIdx = -1;
             }
@@ -93,13 +93,13 @@ function decomment(text) {
 
     function isInsideRegEx() {
         if (regExIdx >= 0) {
-            var lb = text.indexOf(os.EOL, regExIdx + 1);
+            var lb = text.indexOf(EOL, regExIdx + 1);
             var line = text.substr(regExIdx, lb < 0 ? (len - regExIdx) : (lb - regExIdx));
-            var startIdx = idx - regExIdx + 1; // local index that follows the symbol;
+            var startIdx = idx - regExIdx + 1;
             var l = line.length, nextIdx = startIdx;
             do {
                 if (line[nextIdx] === '/' && (nextIdx === l - 1 || line[nextIdx + 1] !== '/') && (nextIdx === startIdx || line[nextIdx - 1] !== '\\')) {
-                    return true; // regEx closure found;
+                    return true;
                 }
             } while (++nextIdx < l);
         }
