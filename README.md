@@ -35,12 +35,12 @@ console.log(decomment(code)); //=> var t;
 
 ### Features
 
-* Removes both single-line and multi-line comments
+* Removes both single and multi-line comments
 * Removes unnecessary gaps left by comment blocks
+* Does not change the resulting formatting/layout
 * Can handle valid JSON or JavaScript of any size
 * Compliant with ECMAScript 6
 
-In terms of the performance, this library is as fast as it gets,
-in part because it makes no use of regular expressions.
+In terms of the performance, this library is as fast as it gets, in part because it makes no use of regular expressions.
 
-For example, it churns through the [source of AngularJS 1.5 Core](https://code.angularjs.org/1.5.0-rc.0/angular.js) (1.1MB of JavaScript) in under 40ms. 
+For example, it churns through the [source of AngularJS 1.5 Core](https://code.angularjs.org/1.5.0-rc.0/angular.js) (1.1MB ~ 30,000 lines of JavaScript) in under 40ms. 
