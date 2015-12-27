@@ -11,6 +11,7 @@ describe("RegEx:", function () {
     describe("with apostrophe", function () {
         it("must ignore the apostrophe", function () {
             expect(decomment("/'/")).toBe("/'/");
+            expect(decomment("/'/" + LB)).toBe("/'/" + LB);
             expect(decomment("/\'/")).toBe("/'/");
         });
     });
@@ -18,6 +19,7 @@ describe("RegEx:", function () {
     describe("with a quote", function () {
         it("must ignore the quote", function () {
             expect(decomment('/"/')).toBe('/"/');
+            expect(decomment('/"/' + LB)).toBe('/"/' + LB);
             expect(decomment('/\"/')).toBe('/"/');
         });
     });
@@ -25,6 +27,7 @@ describe("RegEx:", function () {
     describe("with an es6 apostrophe", function () {
         it("must ignore the apostrophe", function () {
             expect(decomment('/`/')).toBe('/`/');
+            expect(decomment('/`/' + LB)).toBe('/`/' + LB);
             expect(decomment('/\`/')).toBe('/`/');
         });
     });
@@ -50,4 +53,10 @@ describe("RegEx:", function () {
         });
     });
 
+    describe("unfinished regex", function () {
+        it("must remain unchanged", function () {
+            expect(decomment("/'")).toBe("/'");
+            expect(decomment("/'//")).toBe("/'"); // Cutting invalid JavaScript;
+        });
+    });
 });

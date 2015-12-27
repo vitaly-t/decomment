@@ -4,6 +4,7 @@ decomment
 Removes comments from JSON or JavaScript.
 
 [![Build Status](https://travis-ci.org/vitaly-t/decomment.svg?branch=master)](https://travis-ci.org/vitaly-t/decomment)
+[![Coverage Status](https://coveralls.io/repos/vitaly-t/decomment/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/decomment?branch=master)
 
 ### Installing
 

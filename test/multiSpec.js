@@ -111,4 +111,10 @@ describe("Multi:", function () {
             });
         });
     });
+
+    describe("unfinished comment", function () {
+        it("must assume the comment till the end", function () {
+            expect(decomment("/*")).toBe(""); // Cutting invalid JavaScript;
+        });
+    });
 });

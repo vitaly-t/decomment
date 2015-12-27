@@ -51,9 +51,7 @@ function decomment(text) {
                 }
                 continue;
             }
-            if (regExIdx < 0) {
-                regExIdx = idx; // possible regular expression start;
-            }
+            regExIdx = idx; // possible regular expression start;
         }
 
         var symbol = text[idx];
@@ -94,18 +92,17 @@ function decomment(text) {
     } while (++idx < len);
 
     function isInsideRegEx() {
-        if (regExIdx < 0) {
-            return false;
+        if (regExIdx >= 0) {
+            var lb = text.indexOf(os.EOL, regExIdx + 1);
+            var line = text.substr(regExIdx, lb < 0 ? (len - regExIdx) : (lb - regExIdx));
+            var startIdx = idx - regExIdx + 1; // local index that follows the symbol;
+            var l = line.length, nextIdx = startIdx;
+            do {
+                if (line[nextIdx] === '/' && (nextIdx === l - 1 || line[nextIdx + 1] !== '/') && (nextIdx === startIdx || line[nextIdx - 1] !== '\\')) {
+                    return true; // regEx closure found;
+                }
+            } while (++nextIdx < l);
         }
-        var lb = text.indexOf(os.EOL, regExIdx + 1);
-        var line = text.substr(regExIdx, lb < 0 ? (len - regExIdx) : (lb - regExIdx));
-        var startIdx = idx - regExIdx + 1; // local index that follows the symbol;
-        var l = line.length, nextIdx = startIdx;
-        do {
-            if (line[nextIdx] === '/' && (nextIdx === l - 1 || line[nextIdx] !== '/') && (nextIdx === startIdx || line[nextIdx - 1] !== '\\')) {
-                return true; // regEx closure found;
-            }
-        } while (++nextIdx < l);
         return false;
     }
 
