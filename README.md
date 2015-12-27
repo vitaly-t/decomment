@@ -1,6 +1,8 @@
 decomment
 ===========
+
 Removes comments from JavaScript and JSON.
+
 [![Build Status](https://travis-ci.org/vitaly-t/decomment.svg?branch=master)](https://travis-ci.org/vitaly-t/decomment)
 
 ### Installing
@@ -27,5 +29,8 @@ var decomment = require('decomment');
 
 var code = "var t; // comments"; // any valid JavaScript or JSON
 
-decomment(code); //=> var t;
+console.log(decomment(code)); //=> var t;
 ```
+
+The library is compliant with ECMAScript 6, and can handle any valid JavaScript
+or JSON input of any size.
