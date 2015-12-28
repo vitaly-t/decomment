@@ -10,7 +10,15 @@ describe("Single:", function () {
         it("must throw an error", function () {
             expect(function () {
                 decomment();
-            }).toThrow(new TypeError("A text string was expected."));
+            }).toThrow(new TypeError("Parameter 'text' must be a string."));
+        });
+    });
+
+    describe("non-object options", function () {
+        it("must throw an error", function () {
+            expect(function () {
+                decomment("", 123);
+            }).toThrow(new TypeError("Parameter 'options' must be an object."));
         });
     });
 

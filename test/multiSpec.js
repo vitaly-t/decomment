@@ -117,4 +117,11 @@ describe("Multi:", function () {
             expect(decomment("/*")).toBe("");
         });
     });
+
+    describe("multiple line breaks that follow", function () {
+        it("must be removed", function () {
+            expect(decomment("/*text*/" + LB + LB + "end", {trim: true})).toBe("end");
+        });
+    });
+
 });

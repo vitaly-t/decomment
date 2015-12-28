@@ -28,9 +28,24 @@ $ npm run coverage
 ```js
 var decomment = require('decomment');
 
-var code = "var t; // comments";
+var text = "var t; // comments";
 
-console.log(decomment(code)); //=> var t;
+decomment(text); //=> var t;
+```
+
+### API
+
+**decomment(text, [options]) ⇒ String**
+
+Option `trim` is the only one currently supported:
+* `false (default)` - use no trimming for comment blocks
+* `true` - remove empty lines that follow full-line comments
+
+Example:
+ 
+```js
+var text = "/* comment */\r\n\r\nvar test = 123;"; 
+decomment(text, {trim: true}); //=> var test = 123;
 ```
 
 ## Features

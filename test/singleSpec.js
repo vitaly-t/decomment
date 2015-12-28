@@ -136,4 +136,11 @@ describe("Single:", function () {
             });
         });
     });
+
+    describe("multiple line breaks that follow", function () {
+        it("must be removed", function () {
+            expect(decomment("//text" + LB + LB + "end", {trim: true})).toBe("end");
+            expect(decomment("//text" + LB + "\t" + LB + "end", {trim: true})).toBe("end");
+        });
+    });
 });

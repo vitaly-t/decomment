@@ -2,10 +2,14 @@
 
 var EOL = require('os').EOL; // OS-dependent End-of-Line;
 
-function decomment(text) {
+function decomment(text, options) {
 
     if (typeof text !== 'string') {
-        throw new TypeError("A text string was expected.");
+        throw new TypeError("Parameter 'text' must be a string.");
+    }
+
+    if (options !== undefined && typeof(options) !== 'object') {
+        throw new TypeError("Parameter 'options' must be an object.");
     }
 
     var idx = 0, // current index;
@@ -41,6 +45,7 @@ function decomment(text) {
                 if (emptyLine) {
                     emptyLetters = '';
                     idx = lb + EOL.length - 1; // last symbol of the line break;
+                    trim();
                 } else {
                     idx = lb - 1; // just before the line break;
                 }
@@ -58,6 +63,7 @@ function decomment(text) {
                     var lb = text.indexOf(EOL, idx + 1);
                     if (lb > idx) {
                         idx = lb + EOL.length - 1; // last symbol of the line break;
+                        trim();
                     }
                 }
                 continue;
@@ -77,6 +83,7 @@ function decomment(text) {
                 var lb = text.indexOf(EOL, idx + 1);
                 if (lb > idx) {
                     idx = lb + EOL.length - 1; // last symbol of the line break;
+                    trim();
                 }
             }
             continue;
@@ -129,6 +136,21 @@ function decomment(text) {
             } while (++nextIdx < l);
         }
         return false;
+    }
+
+    function trim() {
+        if (options && options.trim) {
+            var startIdx, endIdx, i;
+            do {
+                startIdx = idx + 1;
+                endIdx = text.indexOf(EOL, startIdx);
+                i = startIdx;
+                while ((text[i] === ' ' || text[i] === '\t') && ++i < endIdx);
+                if (i === endIdx) {
+                    idx = endIdx + EOL.length - 1;
+                }
+            } while (i === endIdx);
+        }
     }
 
     return s;
