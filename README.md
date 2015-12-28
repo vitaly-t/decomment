@@ -39,8 +39,8 @@ console.log(decomment(code)); //=> var t;
 * Automatically recognizes HTML and removes all `<!-- comments -->` from it
 * Removes unnecessary gaps on empty lines and the ones left by comment blocks
 * Does not change layout / formatting of the original document
+* Compatible with JSON5 and ECMAScript 6
 * Can handle input code of any size
-* Compliant with ECMAScript 6
 
 The library does not support mixed content - HTML with JavaScript or CSS in it.
 Once the input code is recognized as HTML, only the HTML comments will be removed from it.
