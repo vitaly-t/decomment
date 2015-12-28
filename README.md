@@ -37,8 +37,8 @@ console.log(decomment(code)); //=> var t;
 
 * Removes both single and multi-line comments from JSON, JavaScript and CSS
 * Automatically recognizes HTML and removes all `<!-- comments -->` from it
-* Removes unnecessary gaps on empty lines and the ones left by comment blocks
 * Does not change layout / formatting of the original document
+* Removes lines that have only comments on them
 * Compatible with JSON5 and ECMAScript 6
 * Can handle input code of any size
 
