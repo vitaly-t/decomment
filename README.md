@@ -33,7 +33,7 @@ var text = "var t; // comments";
 decomment(text); //=> var t;
 ```
 
-### API
+#### API
 
 **decomment(text, [options]) ⇒ String**
 
