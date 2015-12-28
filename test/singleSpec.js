@@ -45,6 +45,7 @@ describe("Single:", function () {
             expect(decomment(LB + "//")).toBe(LB);
             // spaces and tabs are removed from empty lines:
             expect(decomment(" \t \t")).toBe("");
+            expect(decomment("text//comment" + LB)).toBe("text" + LB);
         });
     });
 

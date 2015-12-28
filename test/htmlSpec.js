@@ -30,4 +30,25 @@ describe("HTML:", function () {
         });
     });
 
+    describe("unclosed comment", function () {
+        it("must be gone", function () {
+            expect(decomment("\<!-- text")).toBe("");
+            expect(decomment("\<!-- text" + LB)).toBe("");
+        });
+    });
+
+    describe("with text that follows", function () {
+        it("only the text must be left", function () {
+            expect(decomment("\<!-- comment -->text")).toBe("text");
+            expect(decomment("\<!-- comment -->\ttext")).toBe("\ttext");
+        });
+    });
+
+    describe("with prefix text", function () {
+        it("only the text must be left", function () {
+            expect(decomment("\<html\>prefix<!-- comment -->")).toBe("\<html\>prefix");
+            expect(decomment("\<html\>prefix<!-- comment -->" + LB)).toBe("\<html\>prefix" + LB);
+        });
+    });
+
 });
