@@ -13,17 +13,28 @@ function decomment(text) {
         len = text.length, // text length;
         regExIdx = -1, // first possible regEx index in the current line;
         emptyLine = true, // set while no symbols encountered on the current line;
-        emptyLetters = ''; // empty letters on a new line;
+        emptyLetters = '', // empty letters on a new line;
+        isHtml = false; // set when the input is recognized as HTML.
 
     if (!len) {
         return text;
     }
 
+    var tag;
     do {
-        if (text[idx] === '/' && idx < len - 1 && (!idx || text[idx - 1] !== '\\')) {
+        tag = text[idx];
+        if (tag !== ' ' && tag !== '\t' && tag !== '\r' && tag !== '\n') {
+            isHtml = tag === '<';
+            break;
+        }
+    } while (++idx < len);
+    idx = 0;
+
+    do {
+        if (!isHtml && text[idx] === '/' && idx < len - 1 && (!idx || text[idx - 1] !== '\\')) {
             if (text[idx + 1] === '/') {
                 regExIdx = -1;
-                var lb = text.indexOf(EOL, idx + 1);
+                var lb = text.indexOf(EOL, idx + 2);
                 if (lb < 0) {
                     break;
                 }
@@ -37,7 +48,7 @@ function decomment(text) {
             }
             if (text[idx + 1] === '*') {
                 regExIdx = -1;
-                var end = text.indexOf('*/', idx + 1);
+                var end = text.indexOf('*/', idx + 2);
                 if (end < 0) {
                     break;
                 }
@@ -52,6 +63,23 @@ function decomment(text) {
                 continue;
             }
             regExIdx = idx; // possible regular expression start;
+        }
+
+        if (isHtml && text[idx] === '<' && idx < len - 3 && text.substr(idx + 1, 3) === '!--') {
+            regExIdx = -1;
+            var end = text.indexOf('-->', idx + 4);
+            if (end < 0) {
+                break;
+            }
+            idx = end + 2;
+            if (emptyLine) {
+                emptyLetters = '';
+                var lb = text.indexOf(EOL, idx + 1);
+                if (lb > idx) {
+                    idx = lb + EOL.length - 1; // last symbol of the line break;
+                }
+            }
+            continue;
         }
 
         var symbol = text[idx];
@@ -74,7 +102,7 @@ function decomment(text) {
             s += symbol;
         }
 
-        if (symbol === '\'' || symbol === '"' || symbol === '`') {
+        if (!isHtml && (symbol === '\'' || symbol === '"' || symbol === '`')) {
             var closeIdx = idx;
             do {
                 closeIdx = text.indexOf(symbol, closeIdx + 1);

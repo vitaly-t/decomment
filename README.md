@@ -1,7 +1,7 @@
 decomment
 ===========
 
-Removes comments from JSON or JavaScript.
+Removes comments from JSON, JavaScript, CSS and HTML.
 
 [![Build Status](https://travis-ci.org/vitaly-t/decomment.svg?branch=master)](https://travis-ci.org/vitaly-t/decomment)
 [![Coverage Status](https://coveralls.io/repos/vitaly-t/decomment/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/decomment?branch=master)
@@ -28,18 +28,24 @@ $ npm run coverage
 ```js
 var decomment = require('decomment');
 
-var code = "var t; // comments"; // any valid JSON or JavaScript
+var code = "var t; // comments";
 
 console.log(decomment(code)); //=> var t;
 ```
 
 ### Features
 
-* Removes both single and multi-line comments
-* Removes unnecessary gaps left by comment blocks
-* Does not change the resulting layout / formatting
-* Can handle valid JSON or JavaScript of any size
+* Removes both single and multi-line comments from JSON, JavaScript and CSS
+* Automatically recognizes HTML and removes all `<!-- comments -->` from it
+* Removes unnecessary gaps on empty lines and the ones left by comment blocks
+* Does not change the original layout / formatting of the document
+* Can handle input code of any size
 * Compliant with ECMAScript 6
+
+The library does not support mixed content - HTML with JavaScript or CSS in it.
+Once the document is recognized as HTML, only the HTML comments will be removed.
+
+### Performance
 
 In terms of the performance, this library is as fast as it gets, in part because it makes no use of regular expressions.
 

@@ -40,10 +40,11 @@ describe("Single:", function () {
         });
     });
 
-    describe("with line-break prefix", function () {
-        var out = decomment(LB + "//");
-        it("must return the break", function () {
-            expect(out).toBe(LB);
+    describe("with a prefix", function () {
+        it("must return the prefix", function () {
+            expect(decomment(LB + "//")).toBe(LB);
+            // spaces and tabs are removed from empty lines:
+            expect(decomment(" \t \t")).toBe("");
         });
     });
 
