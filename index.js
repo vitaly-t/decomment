@@ -103,10 +103,7 @@ function decomment(text) {
         }
 
         if (!isHtml && (symbol === '\'' || symbol === '"' || symbol === '`')) {
-            var closeIdx = idx;
-            do {
-                closeIdx = text.indexOf(symbol, closeIdx + 1);
-            } while (closeIdx > 0 && text[closeIdx - 1] === '\\');
+            var closeIdx = text.indexOf(symbol, idx + 1);
             if (isInsideRegEx()) {
                 continue;
             }

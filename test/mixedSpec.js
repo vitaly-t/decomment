@@ -8,6 +8,13 @@ var LB = os.EOL;
 
 describe("Mixed:", function () {
 
+    describe("special slash case", function () {
+        it("must be ignored", function () {
+            expect(decomment("'\\'")).toBe("'\\'");
+            expect(decomment("'\\\\'")).toBe("'\\\\'");
+        });
+    });
+
     describe("single-line gaps", function () {
         it("must be removed", function () {
             expect(decomment("//one" + LB + "//two" + LB + "//three")).toBe("");
