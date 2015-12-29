@@ -54,7 +54,7 @@ For example, it churns through [AngularJS 1.5 Core](https://code.angularjs.org/1
 
 #### decomment(text, [options]) ⇒ String
 
-##### options⇒trim
+##### options ⇒ trim
 * `false (default)` - do not trim comments
 * `true` - remove empty lines that follow removed full-line comments
 
@@ -66,7 +66,7 @@ decomment(text); //=> \r\n var test = 123
 decomment(text, {trim: true}); //=> var test = 123
 ```
 
-##### options⇒safe
+##### options ⇒ safe
 * `false (default)` - treat all multi-line comments the same
 * `true` - preserve multi-line comments that start with `/*!`
 
