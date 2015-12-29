@@ -13,8 +13,7 @@ describe("RegEx:", function () {
             expect(decomment("/'/")).toBe("/'/");
             expect(decomment("/'/" + LB)).toBe("/'/" + LB);
             expect(decomment("/\'/")).toBe("/'/");
-            // TODO:
-            // expect(decomment("/\/\'/")).toBe("//'/"); // FAIL
+            expect(decomment("/'\/text")).toBe("/'\/text");
         });
     });
 
@@ -23,8 +22,8 @@ describe("RegEx:", function () {
             expect(decomment('/"/')).toBe('/"/');
             expect(decomment('/"/' + LB)).toBe('/"/' + LB);
             expect(decomment('/\"/')).toBe('/"/');
-            // TODO:
-            // expect(decomment('/\/\"/')).toBe('//"/'); // FAIL
+            expect(decomment('/"\/text')).toBe('/"\/text');
+            expect(decomment('/"\/\/text')).toBe('/"');
         });
     });
 
@@ -67,13 +66,28 @@ describe("RegEx:", function () {
     describe("comments inside text, between dividers", function () {
         it("must ignore the comment", function () {
             expect(decomment("func(1 * 2, '//', 3 / 4)")).toBe("func(1 * 2, '//', 3 / 4)");
-
             expect(decomment("func(1 / 2, '//', 3 * 4)")).toBe("func(1 / 2, '//', 3 * 4)");
-            expect(decomment("func(1 / 2, '//', 3 / 4)")).toBe("func(1 / 2, '//', 3 / 4)");
 
-            // TODO:
-            // expect(decomment("func(1 / 2, '/**/', 3 * 4)")).toBe("func(1 / 2, '/**/', 3 * 4)"); // FAIL
-            // expect(decomment("func(1 / 2, '/**/', 3 / 4)")).toBe("func(1 / 2, '/**/', 3 / 4)"); // FAIL
+            expect(decomment("func(1 * 2, '/text/', 3 / 4)")).toBe("func(1 * 2, '/text/', 3 / 4)");
+            expect(decomment("func(1 * 2, '/some\/text/', 3 / 4)")).toBe("func(1 * 2, '/some/text/', 3 / 4)");
+
+            expect(decomment("func(1 / 2, '/text/', 3 / 4)")).toBe("func(1 / 2, '/text/', 3 / 4)");
+            expect(decomment("func(1 / 2, '/some\/text//', 3 / 4)")).toBe("func(1 / 2, '/some/text//', 3 / 4)");
+
+            expect(decomment("func(1 / 2, '/**/', 3 * 4)")).toBe("func(1 / 2, '/**/', 3 * 4)");
+            expect(decomment("func(1 / 2, '/**/', 3 / 4)")).toBe("func(1 / 2, '/**/', 3 / 4)");
+
+            expect(decomment("a/'/*text*/'")).toBe("a/'/*text*/'");
+
+            // Warning: below is a synthetic test, because it is not a valid JavaScript;
+            expect(decomment("/ 2, '/\/*/'")).toBe("/ 2, '//*/'");
+        });
+    });
+
+    describe("valid regular expressions", function () {
+        it("must repent any content", function () {
+            expect(decomment("=/'/")).toBe("=/'/");
+            expect(decomment(LB + "=/'/")).toBe(LB + "=/'/");
         });
     });
 });

@@ -9,9 +9,9 @@ var LB = os.EOL;
 describe("Multi:", function () {
 
     describe("empty comment", function () {
-        var out = decomment("/**/");
         it("must return an empty string", function () {
-            expect(out).toBe("");
+            expect(decomment("/**/")).toBe("");
+            expect(decomment("\/**\/")).toBe("");
         });
     });
 

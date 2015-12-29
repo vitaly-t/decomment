@@ -9,9 +9,9 @@ var LB = os.EOL;
 describe("Single:", function () {
 
     describe("empty comment", function () {
-        var out = decomment("//");
         it("must return an empty string", function () {
-            expect(out).toBe("");
+            expect(decomment("//")).toBe("");
+            expect(decomment("/\/text")).toBe(""); // '/\/' = '//'
         });
     });
 
