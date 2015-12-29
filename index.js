@@ -18,7 +18,9 @@ function decomment(text, options) {
         regExIdx = -1, // first possible regEx index in the current line;
         emptyLine = true, // set while no symbols encountered on the current line;
         emptyLetters = '', // empty letters on a new line;
-        isHtml = false; // set when the input is recognized as HTML.
+        isHtml = false, // set when the input is recognized as HTML;
+        optTrim = options && options.trim,
+        optSafe = options && options.safe;
 
     if (!len) {
         return text;
@@ -54,16 +56,26 @@ function decomment(text, options) {
             if (text[idx + 1] === '*') {
                 regExIdx = -1;
                 var end = text.indexOf('*/', idx + 2);
+                var keep = optSafe && idx < len - 2 && text[idx + 2] === '!';
+                if (keep) {
+                    if (end < 0) {
+                        s += text.substr(idx, len - idx);
+                    } else {
+                        s += text.substr(idx, end - idx + 2);
+                    }
+                }
                 if (end < 0) {
                     break;
                 }
                 idx = end + 1;
                 if (emptyLine) {
                     emptyLetters = '';
-                    var lb = text.indexOf(EOL, idx + 1);
-                    if (lb > idx) {
-                        idx = lb + EOL.length - 1; // last symbol of the line break;
-                        trim();
+                    if (!keep) {
+                        var lb = text.indexOf(EOL, idx + 1);
+                        if (lb > idx) {
+                            idx = lb + EOL.length - 1; // last symbol of the line break;
+                            trim();
+                        }
                     }
                 }
                 continue;
@@ -139,7 +151,7 @@ function decomment(text, options) {
     }
 
     function trim() {
-        if (options && options.trim) {
+        if (optTrim) {
             var startIdx, endIdx, i;
             do {
                 startIdx = idx + 1;

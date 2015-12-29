@@ -124,4 +124,25 @@ describe("Multi:", function () {
         });
     });
 
+    describe("with safe options", function () {
+
+        it("must become empty when safe=false", function () {
+            expect(decomment("/*!*/")).toBe("");
+            expect(decomment("/*!")).toBe("");
+        });
+
+        it("must keep comments when safe=true", function () {
+            expect(decomment("/*!*/", {safe: true})).toBe("/*!*/");
+            expect(decomment("/*!", {safe: true})).toBe("/*!");
+        });
+    });
+
+    describe("combination of options", function () {
+        it("must process correctly", function () {
+            expect(decomment("/*!special*/" + LB + LB + "code" + LB + "/*normal*/" + LB + LB + "hello", {
+                trim: true,
+                safe: true
+            })).toBe("/*!special*/" + LB + LB + "code" + LB + "hello");
+        });
+    });
 });

@@ -37,16 +37,31 @@ decomment(text); //=> var t;
 
 **decomment(text, [options]) ⇒ String**
 
-Option `trim` is the only one currently supported:
-* `false (default)` - use no trimming for comment blocks
-* `true` - remove empty lines that follow full-line comments
+##### options.trim
+* `false (default)` - do not trim comments
+* `true` - remove empty lines that follow removed full-line comments
 
-Example:
+Examples:
  
 ```js
-var text = "/* comment */\r\n\r\nvar test = 123;"; 
-decomment(text, {trim: true}); //=> var test = 123;
+var text = "/* comment */\r\n\r\n var test = 123"; 
+decomment(text); //=> \r\n var test = 123
+decomment(text, {trim: true}); //=> var test = 123
 ```
+
+##### options.safe
+* `false (default)` - treat all multi-line comments the same
+* `true` - preserve multi-line comments that start with `/*!`
+
+Examples:
+
+```js
+var text = "/*! special */ js code /* normal */";
+decomment(text); //=> js code
+decomment(text, {safe: true}); //=> /*! special */ js code
+```
+
+This option has no effect when processing HTML.
 
 ## Features
 
