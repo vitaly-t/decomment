@@ -139,10 +139,10 @@ describe("Multi:", function () {
 
     describe("combination of options", function () {
         it("must process correctly", function () {
-            expect(decomment("/*!special*/" + LB + LB + "code" + LB + "/*normal*/" + LB + LB + "hello", {
+            expect(decomment("/*!special*/" + LB + LB + "code" + LB + "/*normal*/" + LB + LB + "hello" + LB, {
                 trim: true,
                 safe: true
-            })).toBe("/*!special*/" + LB + LB + "code" + LB + "hello");
+            })).toBe("/*!special*/" + LB + LB + "code" + LB + "hello" + LB);
         });
     });
 });

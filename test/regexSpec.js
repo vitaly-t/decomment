@@ -13,6 +13,8 @@ describe("RegEx:", function () {
             expect(decomment("/'/")).toBe("/'/");
             expect(decomment("/'/" + LB)).toBe("/'/" + LB);
             expect(decomment("/\'/")).toBe("/'/");
+            // TODO:
+            // expect(decomment("/\/\'/")).toBe("//'/"); // FAIL
         });
     });
 
@@ -21,6 +23,8 @@ describe("RegEx:", function () {
             expect(decomment('/"/')).toBe('/"/');
             expect(decomment('/"/' + LB)).toBe('/"/' + LB);
             expect(decomment('/\"/')).toBe('/"/');
+            // TODO:
+            // expect(decomment('/\/\"/')).toBe('//"/'); // FAIL
         });
     });
 
@@ -57,6 +61,19 @@ describe("RegEx:", function () {
         it("must remain unchanged", function () {
             expect(decomment("/'")).toBe("/'");
             expect(decomment("/'//")).toBe("/'"); // Cutting invalid JavaScript;
+        });
+    });
+
+    describe("comments inside text, between dividers", function () {
+        it("must ignore the comment", function () {
+            expect(decomment("func(1 * 2, '//', 3 / 4)")).toBe("func(1 * 2, '//', 3 / 4)");
+
+            expect(decomment("func(1 / 2, '//', 3 * 4)")).toBe("func(1 / 2, '//', 3 * 4)");
+            expect(decomment("func(1 / 2, '//', 3 / 4)")).toBe("func(1 / 2, '//', 3 / 4)");
+
+            // TODO:
+            // expect(decomment("func(1 / 2, '/**/', 3 * 4)")).toBe("func(1 / 2, '/**/', 3 * 4)"); // FAIL
+            // expect(decomment("func(1 / 2, '/**/', 3 / 4)")).toBe("func(1 / 2, '/**/', 3 / 4)"); // FAIL
         });
     });
 });

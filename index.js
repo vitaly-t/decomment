@@ -19,8 +19,8 @@ function decomment(text, options) {
         emptyLine = true, // set while no symbols encountered on the current line;
         emptyLetters = '', // empty letters on a new line;
         isHtml = false, // set when the input is recognized as HTML;
-        optTrim = options && options.trim,
-        optSafe = options && options.safe;
+        optTrim = options && options.trim, // 'trim' option;
+        optSafe = options && options.safe; // 'safe' option.
 
     if (!len) {
         return text;
@@ -143,7 +143,7 @@ function decomment(text, options) {
             var l = line.length, nextIdx = startIdx;
             do {
                 if (line[nextIdx] === '/' && (nextIdx === l - 1 || line[nextIdx + 1] !== '/') && (nextIdx === startIdx || line[nextIdx - 1] !== '\\')) {
-                    return true;
+                    return nextIdx === startIdx || line[nextIdx - 1] === '\\';
                 }
             } while (++nextIdx < l);
         }

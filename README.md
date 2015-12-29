@@ -1,5 +1,5 @@
 decomment
-===========
+=========
 
 Removes comments from JSON, JavaScript, CSS and HTML.
 
@@ -54,7 +54,8 @@ For example, it churns through [AngularJS 1.5 Core](https://code.angularjs.org/1
 
 #### decomment(text, [options]) ⇒ String
 
-##### options ⇒ trim
+
+##### options.trim ⇒ Boolean
 * `false (default)` - do not trim comments
 * `true` - remove empty lines that follow removed full-line comments
 
@@ -66,9 +67,9 @@ decomment(text); //=> \r\n var test = 123
 decomment(text, {trim: true}); //=> var test = 123
 ```
 
-##### options ⇒ safe
-* `false (default)` - treat all multi-line comments the same
-* `true` - preserve multi-line comments that start with `/*!`
+##### options.safe ⇒ Boolean
+* `false (default)` - remove all multi-line comments
+* `true` - keep multi-line comments that start with `/*!`
 
 Examples:
 
@@ -82,5 +83,5 @@ This option has no effect when processing HTML.
 
 ## License
 
-Copyright © 2015 [Vitaly Tomilov](https://github.com/vitaly-t)
+Copyright © 2015 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
