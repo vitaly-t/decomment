@@ -143,21 +143,22 @@ function decomment(text, options) {
             var l = line.length, nextIdx = startIdx;
             do {
                 if (line[nextIdx] === '/' && (nextIdx === l - 1 || line[nextIdx + 1] !== '/') && (nextIdx === startIdx || line[nextIdx - 1] !== '\\')) {
-                    if (nextIdx === startIdx || line[nextIdx - 1] === '\\') {
-                        var lineStartLB = text.lastIndexOf(EOL, regExIdx), searchIdx = regExIdx;
-                        lineStartLB = lineStartLB < 0 ? 0 : lineStartLB + EOL.length;
-                        while (--searchIdx >= lineStartLB && (text[searchIdx] === ' ' || text[searchIdx] === '\t'));
-                        if (searchIdx < lineStartLB) {
-                            return true; // nothing precedes '/' on the line, so it is a valid regEx;
-                        }
-                        var prs = ['=', ';', '(', '{', '[']; // symbols that can precede a valid regEx;
-                        for (var w = 0; w < prs.length; w++) {
-                            if (prs[w] === text[searchIdx]) {
-                                return true;
-                            }
+                    var lineStartLB = text.lastIndexOf(EOL, regExIdx), searchIdx = regExIdx;
+                    lineStartLB = lineStartLB < 0 ? 0 : lineStartLB + EOL.length;
+                    while (--searchIdx >= lineStartLB && (text[searchIdx] === ' ' || text[searchIdx] === '\t'));
+                    if (searchIdx < lineStartLB) {
+                        return true; // nothing precedes '/' on the line, so it is a valid regEx;
+                    }
+                    /*
+                    var prs = ['=', ';', '(', '{', '[']; // symbols that can precede a valid regEx;
+                    for (var w = 0; w < prs.length; w++) {
+                        if (prs[w] === text[searchIdx]) {
+                            return true;
                         }
                     }
                     return false;
+                    */
+                    return true;
                 }
             } while (++nextIdx < l);
         }
