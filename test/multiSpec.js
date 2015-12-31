@@ -2,7 +2,7 @@
 
 // Tests for multi-line comments;
 
-var decomment = require('../');
+var decomment = require('../lib');
 var os = require('os');
 var LB = os.EOL;
 
@@ -112,12 +112,6 @@ describe("Multi:", function () {
         });
     });
 
-    describe("unfinished comment", function () {
-        it("must cut it all off", function () {
-            expect(decomment("/*")).toBe("");
-        });
-    });
-
     describe("multiple line breaks that follow", function () {
         it("must be removed", function () {
             expect(decomment("/*text*/" + LB + LB + "end", {trim: true})).toBe("end");
@@ -128,12 +122,10 @@ describe("Multi:", function () {
 
         it("must become empty when safe=false", function () {
             expect(decomment("/*!*/")).toBe("");
-            expect(decomment("/*!")).toBe("");
         });
 
         it("must keep comments when safe=true", function () {
             expect(decomment("/*!*/", {safe: true})).toBe("/*!*/");
-            expect(decomment("/*!", {safe: true})).toBe("/*!");
         });
     });
 
@@ -145,4 +137,11 @@ describe("Multi:", function () {
             })).toBe("/*!special*/" + LB + LB + "code" + LB + "hello" + LB);
         });
     });
+
+    describe("inside regEx", function () {
+        it("must be ignored", function () {
+            expect(decomment("/[a-b/*]text/")).toBe("/[a-b*]text/");
+        });
+    });
+
 });

@@ -2,7 +2,7 @@
 
 // Tests for single-line comments;
 
-var decomment = require('../');
+var decomment = require('../lib');
 var os = require('os');
 var LB = os.EOL;
 
@@ -98,17 +98,6 @@ describe("Single:", function () {
         });
     });
 
-    describe("with re-used opener", function () {
-        var out1 = decomment("'\''");
-        var out2 = decomment("\"\"\"");
-        var out3 = decomment("`\``");
-        it("must leave only the comment", function () {
-            expect(out1).toBe("'\''");
-            expect(out2).toBe("\"\"\"");
-            expect(out3).toBe("`\``");
-        });
-    });
-
     describe("comments inside text", function () {
         var out = decomment("'//Text'");
         it("must leave only the comment", function () {
@@ -141,6 +130,12 @@ describe("Single:", function () {
         it("must be removed", function () {
             expect(decomment("//text" + LB + LB + "end", {trim: true})).toBe("end");
             expect(decomment("//text" + LB + "\t" + LB + "end", {trim: true})).toBe("end");
+        });
+    });
+
+    describe("inside regEx", function () {
+        it("must be ignored", function () {
+            expect(decomment("/[a-b//]text/")).toBe("/[a-b/]text/");
         });
     });
 });
