@@ -33,7 +33,7 @@ var text = "var t; // comments";
 decomment(text); //=> var t;
 ```
 
-NOTE: Specifically for CSS, call `decomment.css(text, [options])` instead.
+Specifically for CSS, call `decomment.css(text, [options])` instead.
 
 ## Features
 
@@ -85,7 +85,7 @@ This option has no effect when processing HTML.
 
 #### decomment.css(text, [options]) ⇒ String
 
-The same as **decomment**, but specific to processing CSS.
+The same as **decomment**, but specific to CSS.
 
 ## License
 
