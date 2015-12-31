@@ -23,7 +23,6 @@ describe("RegEx:", function () {
             expect(decomment('/"/' + LB)).toBe('/"/' + LB);
             expect(decomment('/\"/')).toBe('/"/');
             expect(decomment('/"\/text')).toBe('/"\/text');
-            //expect(decomment('/"\/\/text')).toBe('/"\/\/text'); FAIL
         });
     });
 
@@ -56,33 +55,18 @@ describe("RegEx:", function () {
         });
     });
 
-    describe("comments inside text, between dividers", function () {
-        it("must ignore the comment", function () {
-
-            // TODO: Reconsider these cases, as they no longer matter;
-
-            expect(decomment("func(1 * 2, '//', 3 / 4)")).toBe("func(1 * 2, '//', 3 / 4)");
-
-            expect(decomment("func(1 / 2, '//', 3 * 4)")).toBe("func(1 / 2, '//', 3 * 4)");
-
-            expect(decomment("func(1 * 2, '/text/', 3 / 4)")).toBe("func(1 * 2, '/text/', 3 / 4)");
-            expect(decomment("func(1 * 2, '/some\/text/', 3 / 4)")).toBe("func(1 * 2, '/some/text/', 3 / 4)");
-
-            expect(decomment("func(1 / 2, '/text/', 3 / 4)")).toBe("func(1 / 2, '/text/', 3 / 4)");
-            expect(decomment("func(1 / 2, '/some\/text//', 3 / 4)")).toBe("func(1 / 2, '/some/text//', 3 / 4)");
-
-            expect(decomment("func(1 / 2, '/**/', 3 * 4)")).toBe("func(1 / 2, '/**/', 3 * 4)");
-            expect(decomment("func(1 / 2, '/**/', 3 / 4)")).toBe("func(1 / 2, '/**/', 3 / 4)");
-
-            expect(decomment("a/'/*text*/'")).toBe("a/'/*text*/'");
-        });
-    });
-
     describe("valid regular expressions", function () {
         it("must repent any content", function () {
             expect(decomment("t=/'/")).toBe("t=/'/");
             expect(decomment(LB + "t=/'/")).toBe(LB + "t=/'/");
             expect(decomment("/[']/")).toBe("/[']/");
+        });
+    });
+
+    describe("multiple regEx in one line", function () {
+        it("must be detected correctly", function () {
+            expect(decomment("/[']/, /[\"]/")).toBe("/[']/, /[\"]/");
+            expect(decomment("/[']/, /[\"]/, /[`]/")).toBe("/[']/, /[\"]/, /[`]/");
         });
     });
 });

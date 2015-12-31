@@ -137,4 +137,11 @@ describe("Multi:", function () {
             })).toBe("/*!special*/" + LB + LB + "code" + LB + "hello" + LB);
         });
     });
+
+    describe("inside regEx", function () {
+        it("must be ignored", function () {
+            expect(decomment("/[a-b/*]text/")).toBe("/[a-b*]text/");
+        });
+    });
+
 });

@@ -132,4 +132,10 @@ describe("Single:", function () {
             expect(decomment("//text" + LB + "\t" + LB + "end", {trim: true})).toBe("end");
         });
     });
+
+    describe("inside regEx", function () {
+        it("must be ignored", function () {
+            expect(decomment("/[a-b//]text/")).toBe("/[a-b/]text/");
+        });
+    });
 });
