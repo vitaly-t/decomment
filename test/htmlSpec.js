@@ -2,7 +2,7 @@
 
 // Tests for HTML comments;
 
-var decomment = require('../');
+var decomment = require('../lib');
 var os = require('os');
 var LB = os.EOL;
 

@@ -2,7 +2,7 @@
 
 // Entry tests;
 
-var decomment = require('../');
+var decomment = require('../lib');
 
 describe("Single:", function () {
 
