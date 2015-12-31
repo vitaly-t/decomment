@@ -48,9 +48,10 @@ Once the input code is recognized as HTML, only the HTML comments will be remove
 
 ## Performance
 
-In terms of the performance, this library is as fast as it gets, in part because it makes no use of regular expressions.
+This library uses [esprima] to guarantee correct processing for regular expressions.
 
-For example, it churns through [AngularJS 1.5 Core](https://code.angularjs.org/1.5.0-rc.0/angular.js) (1.1MB ~ 30,000 lines of JavaScript) in under 200ms. 
+As an example of performance, this library can process [AngularJS 1.5 Core](https://code.angularjs.org/1.5.0-rc.0/angular.js)
+in under 200ms. That's 1.1MB ~ 30,000 lines of JavaScript, with over 100 regular expressions in it.   
 
 ## API
 
@@ -84,9 +85,11 @@ This option has no effect when processing HTML.
 
 #### decomment.css(text, [options]) ⇒ String
 
-The same as **decomment**, but specific to CSS.
+The same as **decomment**, but specific to processing CSS.
 
 ## License
 
 Copyright © 2016 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
+
+[esprima]:https://github.com/jquery/esprima
