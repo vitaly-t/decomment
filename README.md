@@ -50,8 +50,8 @@ Once the input code is recognized as HTML, only the HTML comments will be remove
 
 This library uses [esprima] to guarantee correct processing for regular expressions.
 
-As an example of performance, this library can process [AngularJS 1.5 Core](https://code.angularjs.org/1.5.0-rc.0/angular.js)
-in under 200ms. That's 1.1MB ~ 30,000 lines of JavaScript, with over 100 regular expressions in it.   
+As an example of performance, it can process [AngularJS 1.5 Core](https://code.angularjs.org/1.5.0-rc.0/angular.js)
+in under 200ms. That's 1.1MB ~ 30,000 lines of JavaScript, with 111 regular expressions in it.   
 
 ## API
 
