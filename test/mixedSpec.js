@@ -10,7 +10,7 @@ describe("Mixed:", function () {
 
     describe("special slash case", function () {
         it("must be ignored", function () {
-            //expect(decomment("'\\'")).toBe("'\\'");
+            expect(decomment("'\f'")).toBe("'\f'");
             expect(decomment("'\\\\'")).toBe("'\\\\'");
         });
     });

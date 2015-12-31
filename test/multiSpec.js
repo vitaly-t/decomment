@@ -77,22 +77,22 @@ describe("Multi:", function () {
     describe("with empty text prefix", function () {
         var out1 = decomment("''/**/");
         var out2 = decomment("\"\"/**/");
-        //var out3 = decomment("``/**/");
+        var out3 = decomment("``/**/");
         it("must leave only the comment", function () {
             expect(out1).toBe("''");
             expect(out2).toBe("\"\"");
-            //expect(out3).toBe("``");
+            expect(out3).toBe("``");
         });
     });
 
     describe("with empty text suffix", function () {
         var out1 = decomment("/**/" + LB + "''");
         var out2 = decomment("/**/" + LB + "\"\"");
-        //var out3 = decomment("/**/" + LB + "``");
+        var out3 = decomment("/**/" + LB + "``");
         it("must leave only the comment", function () {
             expect(out1).toBe("''");
             expect(out2).toBe("\"\"");
-            //expect(out3).toBe("``");
+            expect(out3).toBe("``");
         });
     });
 
@@ -112,12 +112,6 @@ describe("Multi:", function () {
         });
     });
 
-    describe("unfinished comment", function () {
-        it("must cut it all off", function () {
-            //expect(decomment("/*")).toBe("");
-        });
-    });
-
     describe("multiple line breaks that follow", function () {
         it("must be removed", function () {
             expect(decomment("/*text*/" + LB + LB + "end", {trim: true})).toBe("end");
@@ -128,12 +122,10 @@ describe("Multi:", function () {
 
         it("must become empty when safe=false", function () {
             expect(decomment("/*!*/")).toBe("");
-            //expect(decomment("/*!")).toBe("");
         });
 
         it("must keep comments when safe=true", function () {
             expect(decomment("/*!*/", {safe: true})).toBe("/*!*/");
-            //expect(decomment("/*!", {safe: true})).toBe("/*!");
         });
     });
 
