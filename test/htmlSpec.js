@@ -51,4 +51,9 @@ describe("HTML:", function () {
         });
     });
 
+    describe("Explicit HTML call", function () {
+        it("must process it as HTML always", function () {
+            expect(decomment.html("text<!-- comment -->")).toBe("text");
+        });
+    });
 });

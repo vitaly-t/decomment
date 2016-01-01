@@ -1,12 +1,12 @@
 'use strict';
 
-// Tests for CSS;
+// Tests for any text file;
 
-var decomment = require('../lib').css;
+var decomment = require('../lib').text;
 var os = require('os');
 var LB = os.EOL;
 
-describe("CSS:", function () {
+describe("Text:", function () {
 
     describe("empty comment", function () {
         it("must be removed", function () {

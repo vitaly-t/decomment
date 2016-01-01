@@ -1,7 +1,7 @@
 decomment
 =========
 
-Removes comments from JSON, JavaScript, CSS and HTML.
+Removes comments from JSON, JavaScript, CSS, HTML, etc.
 
 [![Build Status](https://travis-ci.org/vitaly-t/decomment.svg?branch=master)](https://travis-ci.org/vitaly-t/decomment)
 [![Coverage Status](https://coveralls.io/repos/vitaly-t/decomment/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/decomment?branch=master)
@@ -28,12 +28,10 @@ $ npm run coverage
 ```js
 var decomment = require('decomment');
 
-var text = "var t; // comments";
+var code = "var t; // comments";
 
-decomment(text); //=> var t;
+decomment(code); //=> var t;
 ```
-
-Specifically for CSS, call `decomment.css(text, [options])` instead.
 
 ## Features
 
@@ -55,7 +53,17 @@ in under 100ms, which is 1.1MB ~ 30,000 lines of JavaScript.
 
 ## API
 
-#### decomment(text, [options]) ⇒ String
+#### decomment(code, [options]) ⇒ String
+
+This method first parses `code` to determine whether it is an HTML (starts with `<`),
+and if so, removes all `<!-- comment -->` entries from it, according to the `options`.
+
+When `code` is not recognized as HTML, it is assumed to be either JSON or JavaScript.
+In this case the `code` is parsed through [esprima] for ECMAScript 6 compliance, and
+to extract details about regular expressions.
+
+If [esprima] fails to validate the code, it will throw a parsing error. When successful,
+this method will remove `//` and `/**/` comments according to the `options` (see below).
 
 ##### options.trim ⇒ Boolean
 * `false (default)` - do not trim comments
@@ -64,9 +72,9 @@ in under 100ms, which is 1.1MB ~ 30,000 lines of JavaScript.
 Examples:
  
 ```js
-var text = "/* comment */\r\n\r\n var test = 123"; 
-decomment(text); //=> \r\n var test = 123
-decomment(text, {trim: true}); //=> var test = 123
+var code = "/* comment */\r\n\r\n var test = 123"; 
+decomment(code); //=> \r\n var test = 123
+decomment(code, {trim: true}); //=> var test = 123
 ```
 
 ##### options.safe ⇒ Boolean
@@ -76,16 +84,26 @@ decomment(text, {trim: true}); //=> var test = 123
 Examples:
 
 ```js
-var text = "/*! special */ js code /* normal */";
-decomment(text); //=> js code
-decomment(text, {safe: true}); //=> /*! special */ js code
+var code = "/*! special */ var a; /* normal */";
+decomment(code); //=> var a;
+decomment(code, {safe: true}); //=> /*! special */ var a;
 ```
 
 This option has no effect when processing HTML.
 
-#### decomment.css(text, [options]) ⇒ String
+#### decomment.text(text, [options]) ⇒ String
 
-The same as **decomment**, but specific to CSS.
+Unlike the default **decomment**, it instructs the library that `text` is not
+a JSON, JavaScript or HTML, rather a plain text that needs no parsing or validation,
+only to remove `//` and `/**/` comments from it according to `options`.
+
+CSS is the most frequent example of where this method is to be used.
+
+#### decomment.html(html, [options]) ⇒ String
+
+Unlike the default **decomment** method, it instructs the library not to parse
+or validate the input in any way, rather assume it to be HTML, and remove all
+`<!-- comment -->` entries from it according to `options`.
 
 ## License
 
