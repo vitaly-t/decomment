@@ -10,7 +10,7 @@ describe("Single:", function () {
         it("must throw an error", function () {
             expect(function () {
                 decomment();
-            }).toThrow(new TypeError("Parameter 'code' must be a text string."));
+            }).toThrow(new TypeError("Input code/text/html must be string."));
         });
     });
 
