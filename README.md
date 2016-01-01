@@ -69,9 +69,10 @@ this method will remove `//` and `/**/` comments according to the `options` (see
 * `false (default)` - do not trim comments
 * `true` - remove empty lines that follow removed full-line comments
 
-Examples:
+Example:
  
 ```js
+var decomment = require('decomment');
 var code = "/* comment */\r\n\r\n var test = 123"; 
 decomment(code); //=> \r\n var test = 123
 decomment(code, {trim: true}); //=> var test = 123
@@ -81,9 +82,10 @@ decomment(code, {trim: true}); //=> var test = 123
 * `false (default)` - remove all multi-line comments
 * `true` - keep multi-line comments that start with `/*!`
 
-Examples:
+Example:
 
 ```js
+var decomment = require('decomment');
 var code = "/*! special */ var a; /* normal */";
 decomment(code); //=> var a;
 decomment(code, {safe: true}); //=> /*! special */ var a;
@@ -99,8 +101,17 @@ only to remove `//` and `/**/` comments from it according to the `options`.
 
 CSS is the most frequent example of where this method is to be used.
 
-You should not use this method for JSON or JavaScript, as it can break your
-regular expressions.
+Example:
+
+```js
+var decomment = require('decomment');
+var text = "cssClass{color:Red;}// comments";
+decomment.text(text); //=> cssClass{color:Red;}
+```
+
+Please note that while comment blocks located inside `''`, `""` or \`\` are not removed,
+the same as for JSON or JavaScript, you should not use this method for JSON or JavaScript,
+as it can break your regular expressions.
 
 ### decomment.html(html, [options]) ⇒ String
 
