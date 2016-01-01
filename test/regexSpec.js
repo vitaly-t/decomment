@@ -69,4 +69,11 @@ describe("RegEx:", function () {
             expect(decomment("/[']/, /[\"]/, /[`]/")).toBe("/[']/, /[\"]/, /[`]/");
         });
     });
+
+    describe("with comments on the outside", function () {
+        it("must remove the comments", function () {
+            expect(decomment("/*comment*/ /text/")).toBe(" /text/");
+            expect(decomment("/text/ //comment")).toBe("/text/ ");
+        });
+    });
 });

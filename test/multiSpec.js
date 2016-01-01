@@ -16,48 +16,40 @@ describe("Multi:", function () {
     });
 
     describe("multiple empty comments", function () {
-        var out1 = decomment("/**/" + LB + "/**/" + LB);
-        var out2 = decomment("/**/" + LB + "/**/");
         it("must return an empty string", function () {
-            expect(out1).toBe("");
-            expect(out2).toBe("");
+            expect(decomment("/**/" + LB + "/**/" + LB)).toBe("");
+            expect(decomment("/**/" + LB + "/**/")).toBe("");
         });
     });
 
     describe("non-empty comment", function () {
-        var out = decomment("/* text*/");
         it("must return an empty string", function () {
-            expect(out).toBe("");
+            expect(decomment("/* text*/")).toBe("");
         });
     });
 
     describe("non-empty multiple comments", function () {
-        var out1 = decomment("/* text1 */" + LB + "/*text2*/");
-        var out2 = decomment("/* text1 */" + LB + "/*text2*/" + LB);
         it("must return an empty string", function () {
-            expect(out1).toBe("");
-            expect(out2).toBe("");
+            expect(decomment("/* text1 */" + LB + "/*text2*/")).toBe("");
+            expect(decomment("/* text1 */" + LB + "/*text2*/" + LB)).toBe("");
         });
     });
 
     describe("with line-break prefix", function () {
-        var out = decomment(LB + "/**/");
         it("must return the break", function () {
-            expect(out).toBe(LB);
+            expect(decomment(LB + "/**/")).toBe(LB);
         });
     });
 
     describe("with line-break suffix", function () {
-        var out = decomment("/**/" + LB);
         it("must return an empty string", function () {
-            expect(out).toBe("");
+            expect(decomment("/**/" + LB)).toBe("");
         });
     });
 
     describe("with multiple line-break suffixes", function () {
-        var out = decomment("/**/" + LB + LB);
         it("must return a single line break", function () {
-            expect(out).toBe(LB);
+            expect(decomment("/**/" + LB + LB)).toBe(LB);
         });
     });
 
