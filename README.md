@@ -35,7 +35,7 @@ decomment(code); //=> var t;
 
 ## Features
 
-* Removes both single and multi-line comments from JSON, JavaScript and CSS
+* Removes both single and multi-line comments from JSON, JavaScript and CSS/Text
 * Automatically recognizes HTML and removes all `<!-- comments -->` from it
 * Does not change layout / formatting of the original document
 * Removes lines that have only comments on them
@@ -53,19 +53,19 @@ in under 100ms, which is 1.1MB ~ 30,000 lines of JavaScript.
 
 ## API
 
-#### decomment(code, [options]) ⇒ String
+### decomment(code, [options]) ⇒ String
 
 This method first parses `code` to determine whether it is an HTML (starts with `<`),
-and if so, removes all `<!-- comment -->` entries from it, according to the `options`.
+and if so, removes all `<!-- comment -->` entries from it, according to `options`.
 
 When `code` is not recognized as HTML, it is assumed to be either JSON or JavaScript.
-In this case the `code` is parsed through [esprima] for ECMAScript 6 compliance, and
+In this case the code is parsed through [esprima] for ECMAScript 6 compliance, and
 to extract details about regular expressions.
 
 If [esprima] fails to validate the code, it will throw a parsing error. When successful,
 this method will remove `//` and `/**/` comments according to the `options` (see below).
 
-##### options.trim ⇒ Boolean
+#### options.trim ⇒ Boolean
 * `false (default)` - do not trim comments
 * `true` - remove empty lines that follow removed full-line comments
 
@@ -77,7 +77,7 @@ decomment(code); //=> \r\n var test = 123
 decomment(code, {trim: true}); //=> var test = 123
 ```
 
-##### options.safe ⇒ Boolean
+#### options.safe ⇒ Boolean
 * `false (default)` - remove all multi-line comments
 * `true` - keep multi-line comments that start with `/*!`
 
@@ -91,19 +91,19 @@ decomment(code, {safe: true}); //=> /*! special */ var a;
 
 This option has no effect when processing HTML.
 
-#### decomment.text(text, [options]) ⇒ String
+### decomment.text(text, [options]) ⇒ String
 
 Unlike the default **decomment**, it instructs the library that `text` is not
 a JSON, JavaScript or HTML, rather a plain text that needs no parsing or validation,
-only to remove `//` and `/**/` comments from it according to `options`.
+only to remove `//` and `/**/` comments from it according to the `options`.
 
 CSS is the most frequent example of where this method is to be used.
 
-#### decomment.html(html, [options]) ⇒ String
+### decomment.html(html, [options]) ⇒ String
 
 Unlike the default **decomment** method, it instructs the library not to parse
 or validate the input in any way, rather assume it to be HTML, and remove all
-`<!-- comment -->` entries from it according to `options`.
+`<!-- comment -->` entries from it according to the `options`.
 
 ## License
 
