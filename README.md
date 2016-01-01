@@ -46,7 +46,7 @@ Once the input code is recognized as HTML, only the HTML comments will be remove
 
 ## Performance
 
-This library uses [esprima] to guarantee correct processing for regular expressions.
+For JSON and JavaScript this library uses [esprima] to guarantee correct processing for regular expressions.
 
 As an example, it can process [AngularJS 1.5 Core](https://code.angularjs.org/1.5.0-rc.0/angular.js)
 in under 100ms, which is 1.1MB ~ 30,000 lines of JavaScript.   
