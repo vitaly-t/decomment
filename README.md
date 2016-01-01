@@ -65,7 +65,7 @@ to extract details about regular expressions.
 If [esprima] fails to validate the code, it will throw a parsing error. When successful,
 this method will remove `//` and `/**/` comments according to the `options` (see below).
 
-#### options.trim ⇒ Boolean
+##### options.trim ⇒ Boolean
 * `false (default)` - do not trim comments
 * `true` - remove empty lines that follow removed full-line comments
 
@@ -77,7 +77,7 @@ decomment(code); //=> \r\n var test = 123
 decomment(code, {trim: true}); //=> var test = 123
 ```
 
-#### options.safe ⇒ Boolean
+##### options.safe ⇒ Boolean
 * `false (default)` - remove all multi-line comments
 * `true` - keep multi-line comments that start with `/*!`
 
@@ -98,6 +98,9 @@ a JSON, JavaScript or HTML, rather a plain text that needs no parsing or validat
 only to remove `//` and `/**/` comments from it according to the `options`.
 
 CSS is the most frequent example of where this method is to be used.
+
+You should not use this method for JSON or JavaScript, as it can break your
+regular expressions.
 
 ### decomment.html(html, [options]) ⇒ String
 
