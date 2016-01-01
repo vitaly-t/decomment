@@ -135,7 +135,7 @@ describe("Single:", function () {
 
     describe("inside regEx", function () {
         it("must be ignored", function () {
-            expect(decomment("/[a-b//]text/")).toBe("/[a-b/]text/");
+            expect(decomment("/[a-b//]text/")).toBe("/[a-b//]text/");
         });
     });
 });
