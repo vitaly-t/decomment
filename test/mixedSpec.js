@@ -8,10 +8,21 @@ var LB = os.EOL;
 
 describe("Mixed:", function () {
 
-    describe("special slash case", function () {
+    describe("special slash cases", function () {
         it("must be ignored", function () {
             expect(decomment("'\f'")).toBe("'\f'");
+
+            expect(decomment("'\\''")).toBe("'\\''");
+            expect(decomment('"\\""')).toBe('"\\""');
+            expect(decomment('`\\``')).toBe('`\\``');
+
+            expect(decomment("'\\'\\''")).toBe("'\\'\\''");
+            expect(decomment('"\\"\\""')).toBe('"\\"\\""');
+            expect(decomment('`\\`\\``')).toBe('`\\`\\``');
+
             expect(decomment("'\\\\'")).toBe("'\\\\'");
+            expect(decomment('"\\\\"')).toBe('"\\\\"');
+            expect(decomment('`\\\\`')).toBe('`\\\\`');
         });
     });
 

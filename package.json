@@ -1,6 +1,6 @@
 {
   "name": "decomment",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Removes comments from JSON, JavaScript, CSS, HTML, etc.",
   "main": "lib/index.js",
   "scripts": {
@@ -47,3 +47,4 @@
     "jasmine-node": "1.x"
   }
 }
+
