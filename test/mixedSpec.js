@@ -23,6 +23,16 @@ describe("Mixed:", function () {
             expect(decomment("'\\\\'")).toBe("'\\\\'");
             expect(decomment('"\\\\"')).toBe('"\\\\"');
             expect(decomment('`\\\\`')).toBe('`\\\\`');
+
+            expect(decomment("'\\\\\\''")).toBe("'\\\\\\''");
+            expect(decomment("'\\\\\\'';")).toBe("'\\\\\\'';");
+
+            expect(decomment('"\\\\\\""')).toBe('"\\\\\\""');
+            expect(decomment('"\\\\\\"";')).toBe('"\\\\\\"";');
+
+            expect(decomment('`\\\\\\``')).toBe('`\\\\\\``');
+            expect(decomment('`\\\\\\``;')).toBe('`\\\\\\``;');
+
         });
     });
 
