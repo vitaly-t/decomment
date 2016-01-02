@@ -99,9 +99,7 @@ Unlike the default **decomment**, it instructs the library that `text` is not a 
 JavaScript or HTML, rather a plain text that needs no parsing or validation,
 only to remove `//` and `/**/` comments from it according to the `options`.
 
-CSS is the main example of where this method is to be used.
-
-Example:
+CSS is the main example of where to use this method:
 
 ```js
 var decomment = require('decomment');
