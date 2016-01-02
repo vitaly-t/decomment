@@ -55,12 +55,12 @@ in under 100ms, which is 1.1MB ~ 30,000 lines of JavaScript.
 
 ### decomment(code, [options]) ⇒ String
 
-This method first parses `code` to determine whether it is an HTML (starts with `<`),
-and if so, removes all `<!-- comment -->` entries from it, according to `options`.
+This method first parses the `code` to determine whether it is an HTML (starts with `<`),
+and if so, removes all `<!-- comment -->` entries from it, according to the `options`.
 
-When `code` is not recognized as HTML, it is assumed to be either JSON or JavaScript.
-In this case the code is parsed through [esprima] for ECMAScript 6 compliance, and
-to extract details about regular expressions.
+When the `code` is not recognized as HTML, it is assumed to be either JSON or JavaScript.
+It is then parsed through [esprima] for ECMAScript 6 compliance, and to extract details
+about regular expressions.
 
 If [esprima] fails to validate the code, it will throw a parsing error. When successful,
 this method will remove `//` and `/**/` comments according to the `options` (see below).
@@ -95,11 +95,11 @@ This option has no effect when processing HTML.
 
 ### decomment.text(text, [options]) ⇒ String
 
-Unlike the default **decomment**, it instructs the library that `text` is not
-a JSON, JavaScript or HTML, rather a plain text that needs no parsing or validation,
+Unlike the default **decomment**, it instructs the library that `text` is not a JSON,
+JavaScript or HTML, rather a plain text that needs no parsing or validation,
 only to remove `//` and `/**/` comments from it according to the `options`.
 
-CSS is the most frequent example of where this method is to be used.
+CSS is the main example of where this method is to be used.
 
 Example:
 
@@ -109,9 +109,8 @@ var text = "cssClass{color:Red;}// comments";
 decomment.text(text); //=> cssClass{color:Red;}
 ```
 
-Please note that while comment blocks located inside `''`, `""` or \`\` are not removed,
-the same as for JSON or JavaScript, you should not use this method for JSON or JavaScript,
-as it can break your regular expressions.
+Please note that while the same rules apply for the text blocks (`''`, `""` and \`\`),
+you should not use this method for JSON or JavaScript, as it can break your regular expressions.
 
 ### decomment.html(html, [options]) ⇒ String
 
