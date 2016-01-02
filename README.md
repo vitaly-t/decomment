@@ -55,7 +55,7 @@ in under 100ms, which is 1.1MB ~ 30,000 lines of JavaScript.
 
 ### decomment(code, [options]) ⇒ String
 
-This method first checks of the code starts with `<`, as an HTML, and if so,
+This method first checks if the code starts with `<`, as an HTML, and if so,
 all `<!-- comment -->` entries are removed, according to the `options`.
 
 When the `code` is not recognized as HTML, it is assumed to be either JSON or JavaScript.
