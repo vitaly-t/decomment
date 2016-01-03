@@ -99,8 +99,8 @@ Unlike the default **decomment**, it instructs the library that `text` is not a 
 JavaScript or HTML, rather a plain text that needs no parsing or validation,
 only to remove `//` and `/**/` comments from it according to the `options`.
 
-This method is good for any file that uses syntax `//` and `/**/` for comments,
-such as: .CSS, .CPP, .H, etc.
+This method is good for any text file that uses syntax `//` and `/**/` for comments,
+such as: `.CSS`, `.CPP`, `.H`, etc.
 
 Example:
 
