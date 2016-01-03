@@ -99,12 +99,15 @@ Unlike the default **decomment**, it instructs the library that `text` is not a 
 JavaScript or HTML, rather a plain text that needs no parsing or validation,
 only to remove `//` and `/**/` comments from it according to the `options`.
 
-CSS is the main example of where to use this method:
+This method is good for any file that uses syntax `//` and `/**/` for comments,
+such as: .CSS, .CPP, .H, etc.
+
+Example:
 
 ```js
 var decomment = require('decomment');
-var text = "cssClass{color:Red;}// comments";
-decomment.text(text); //=> cssClass{color:Red;}
+var text = ".my-class{color:Red;}// comments";
+decomment.text(text); //=> .my-class{color:Red;}
 ```
 
 Please note that while the same rules apply for the text blocks (`''`, `""` and \`\`),
