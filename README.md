@@ -83,7 +83,7 @@ NOTE: This option has no effect when processing HTML.
 ##### options.space ⇒ Boolean
 * `false (default)` - remove comment blocks entirely
 * `true` - replace comment blocks with white spaces where needed, in order to preserve
-the original line + column position of every element in the `code`.
+the original line + column position of every code element.
 
 Example:
  

@@ -11,7 +11,7 @@ describe("Single:", function () {
     describe("empty comment", function () {
         it("must return an empty string", function () {
             expect(decomment("//")).toBe("");
-            expect(decomment("/\/text")).toBe(""); // '/\/' = '//'
+            expect(decomment("/\/text")).toBe("");
         });
     });
 
