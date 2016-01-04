@@ -96,4 +96,22 @@ describe("HTML:", function () {
         });
     });
 
+    describe("across lines, with space=false", function () {
+        it("must delete all lines", function () {
+            expect(decomment("<!--start" + LB + "middle" + LB + "end-->")).toBe("");
+            expect(decomment("<!--start" + LB + "middle" + LB + "end-->text")).toBe("text");
+            expect(decomment.html("prefix-<!--start" + LB + "middle" + LB + "end-->suffix")).toBe("prefix-suffix");
+        });
+    });
+
+    describe("across lines, with space=true", function () {
+        it("must replace deleted lines with line break", function () {
+            expect(decomment("<!--start" + LB + "middle" + LB + "end-->text" + LB, {space: true})).toBe(LB + LB + "      text" + LB);
+            expect(decomment("<!--start" + LB + "middle" + LB + "end-->\ttext", {space: true})).toBe(LB + LB + "      \ttext");
+            expect(decomment("<!--start" + LB + "middle" + LB + "end-->", {space: true})).toBe(LB + LB);
+            expect(decomment("<!--start" + LB + "middle" + LB + "end-->text", {space: true})).toBe(LB + LB + "      text");
+            expect(decomment.html("prefix<!--start" + LB + "middle" + LB + "end-->suffix", {space: true})).toBe("prefix" + LB + LB + "      suffix");
+        });
+    });
+
 });

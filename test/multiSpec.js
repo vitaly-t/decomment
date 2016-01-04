@@ -196,10 +196,11 @@ describe("Multi:", function () {
 
     describe("across lines, with space=true", function () {
         it("must replace deleted lines with line break", function () {
-            // TODO: Option `space` needs to support multi-line comments properly!
-            //expect(decomment("/*start" + LB + "middle" + LB + "end*/", {space: true})).toBe(LB + LB);
-            //expect(decomment("/*start" + LB + "middle" + LB + "end*/text", {space: true})).toBe(LB + LB);
-            //expect(decomment("prefix/*start" + LB + "middle" + LB + "end*/suffix", {space: true})).toBe("prefix" + LB + "suffix");
+            expect(decomment("/*start" + LB + "middle" + LB + "end*/text" + LB, {space: true})).toBe(LB + LB + "     text" + LB);
+            expect(decomment("/*start" + LB + "middle" + LB + "end*/\ttext", {space: true})).toBe(LB + LB + "     \ttext");
+            expect(decomment("/*start" + LB + "middle" + LB + "end*/", {space: true})).toBe(LB + LB);
+            expect(decomment("/*start" + LB + "middle" + LB + "end*/text", {space: true})).toBe(LB + LB + "     text");
+            expect(decomment("prefix/*start" + LB + "middle" + LB + "end*/suffix", {space: true})).toBe("prefix" + LB + LB + "     suffix");
         });
     });
 
