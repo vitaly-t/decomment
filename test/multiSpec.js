@@ -8,23 +8,48 @@ var LB = os.EOL;
 
 describe("Multi:", function () {
 
-    describe("empty comment", function () {
+    describe("empty comment, space=false", function () {
         it("must return an empty string", function () {
             expect(decomment("/**/")).toBe("");
             expect(decomment("\/**\/")).toBe("");
         });
     });
 
-    describe("multiple empty comments", function () {
+    describe("empty comment, space=true", function () {
+        it("must return spaces where needed", function () {
+            expect(decomment("/**/", {space: true})).toBe("");
+            expect(decomment("\/**\/")).toBe("");
+        });
+    });
+
+    describe("multiple empty comments, space=false", function () {
         it("must return an empty string", function () {
-            expect(decomment("/**/" + LB + "/**/" + LB)).toBe("");
             expect(decomment("/**/" + LB + "/**/")).toBe("");
+            expect(decomment("/**/" + LB + "/**/" + LB)).toBe("");
+        });
+    });
+
+    describe("multiple empty comments, space=true", function () {
+        it("must return only line breaks", function () {
+            expect(decomment("/**/" + LB, {space: true})).toBe(LB);
+            expect(decomment("/**/" + LB + "/**/", {space: true})).toBe(LB);
+            expect(decomment("/**/" + LB + "/**/" + LB, {space: true})).toBe(LB + LB);
+        });
+    });
+
+    describe("multiple comments, space=true", function () {
+        it("must return correct spaces", function () {
+            expect(decomment("/**/ " + LB, {space: true})).toBe(LB);
+            expect(decomment("/**/   " + LB, {space: true})).toBe(LB);
+            expect(decomment("/**/ /**/" + LB, {space: true})).toBe("    " + LB);
+            expect(decomment("/**/a/**/b/**/c" + LB, {space: true})).toBe("    a    b    c" + LB);
+            expect(decomment("/**/ a/**/ b/**/ c " + LB, {space: true})).toBe("     a     b     c " + LB);
         });
     });
 
     describe("non-empty comment", function () {
         it("must return an empty string", function () {
-            expect(decomment("/* text*/")).toBe("");
+            expect(decomment("/*text*/")).toBe("");
         });
     });
 
@@ -53,16 +78,21 @@ describe("Multi:", function () {
         });
     });
 
-    describe("with preceding text", function () {
-        var out1 = decomment("Text/**/");
-        var out2 = decomment(LB + "Text/**/");
-        var out3 = decomment("Text" + LB + "/**/");
-        var out4 = decomment("Text/**/" + LB + "Here");
+    describe("with preceding text, space=false", function () {
         it("must return the preceding text", function () {
-            expect(out1).toBe("Text");
-            expect(out2).toBe(LB + "Text");
-            expect(out3).toBe("Text" + LB);
-            expect(out4).toBe("Text" + LB + "Here");
+            expect(decomment("Text/**/")).toBe("Text");
+            expect(decomment(LB + "Text/**/")).toBe(LB + "Text");
+            expect(decomment("Text" + LB + "/**/")).toBe("Text" + LB);
+            expect(decomment("Text/**/" + LB + "Here")).toBe("Text" + LB + "Here");
+        });
+    });
+
+    describe("with preceding text, space=true", function () {
+        it("must return the preceding text", function () {
+            expect(decomment("Text/**/", {space: true})).toBe("Text");
+            expect(decomment(LB + "Text/**/", {space: true})).toBe(LB + "Text");
+            expect(decomment("Text" + LB + "/**/", {space: true})).toBe("Text" + LB);
+            expect(decomment("Text/**/" + LB + "Here", {space: true})).toBe("Text" + LB + "Here");
         });
     });
 
@@ -89,9 +119,29 @@ describe("Multi:", function () {
     });
 
     describe("comments inside text", function () {
-        var out = decomment("'/**/Text'");
         it("must leave only the comment", function () {
-            expect(out).toBe("'/**/Text'");
+            expect(decomment("'/**/text'")).toBe("'/**/text'");
+        });
+    });
+
+    describe("starting comments suffixed by text, space=false", function () {
+        it("must remove comment and preserve the suffix", function () {
+            expect(decomment("/*hello*/text" + LB + "next")).toBe("text" + LB + "next");
+        });
+    });
+
+    describe("starting comments suffixed by text, space=true", function () {
+        it("must replace comment with white spaces and preserve the suffix", function () {
+            expect(decomment("/*hello*/text" + LB + "next", {space: true})).toBe("         text" + LB + "next");
+        });
+    });
+
+    describe("starting comments suffixed by spaces", function () {
+        it("must remove comment and spaces", function () {
+            expect(decomment("/*hello*/ " + LB + "next")).toBe("next");
+            expect(decomment(" /*hello*/ " + LB + "next")).toBe("next");
+            expect(decomment("/*hello*/ \t " + LB + "next")).toBe("next");
+            expect(decomment(" \t /*hello*/ \t " + LB + "next")).toBe("next");
         });
     });
 

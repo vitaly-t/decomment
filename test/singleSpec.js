@@ -15,12 +15,17 @@ describe("Single:", function () {
         });
     });
 
-    describe("multiple empty comments", function () {
-        var out1 = decomment("//" + LB + "//" + LB);
-        var out2 = decomment("//" + LB + "//");
+    describe("multiple empty comments, space=false", function () {
         it("must return an empty string", function () {
-            expect(out1).toBe("");
-            expect(out2).toBe("");
+            expect(decomment("//" + LB + "//")).toBe("");
+            expect(decomment("//" + LB + "//" + LB)).toBe("");
+        });
+    });
+
+    describe("multiple empty comments, space=true", function () {
+        it("must return line breaks", function () {
+            expect(decomment("//" + LB + "//", {space: true})).toBe(LB);
+            expect(decomment("//" + LB + "//" + LB, {space: true})).toBe(LB + LB);
         });
     });
 

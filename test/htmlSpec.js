@@ -51,9 +51,49 @@ describe("HTML:", function () {
         });
     });
 
+    describe("with space=true", function () {
+        it("must return the preceding text", function () {
+            expect(decomment.html("Text<!---->", {space: true})).toBe("Text");
+            expect(decomment.html(LB + "Text<!---->", {space: true})).toBe(LB + "Text");
+            expect(decomment.html("Text" + LB + "<!---->", {space: true})).toBe("Text" + LB);
+            expect(decomment.html("Text<!---->" + LB + "Here", {space: true})).toBe("Text" + LB + "Here");
+        });
+    });
+
+    describe("with preceding text", function () {
+        it("must return the preceding text", function () {
+            expect(decomment.html("Text<!---->")).toBe("Text");
+            expect(decomment.html(LB + "Text<!---->")).toBe(LB + "Text");
+            expect(decomment.html("Text" + LB + "<!---->")).toBe("Text" + LB);
+            expect(decomment.html("Text<!---->" + LB + "Here")).toBe("Text" + LB + "Here");
+        });
+    });
+
     describe("Explicit HTML call", function () {
         it("must process it as HTML always", function () {
             expect(decomment.html("text<!-- comment -->")).toBe("text");
         });
     });
+
+    describe("starting comments suffixed by spaces", function () {
+        it("must remove comment and spaces", function () {
+            expect(decomment("<!--hello--> " + LB + "next")).toBe("next");
+            expect(decomment(" <!--hello--> " + LB + "next")).toBe("next");
+            expect(decomment("<!--hello--> \t " + LB + "next")).toBe("next");
+            expect(decomment(" \t <!--hello--> \t " + LB + "next")).toBe("next");
+        });
+    });
+
+    describe("starting comments suffixed by text, space=false", function () {
+        it("must remove comment and preserve the suffix", function () {
+            expect(decomment("<!--hello-->text" + LB + "next")).toBe("text" + LB + "next");
+        });
+    });
+
+    describe("starting comments suffixed by text, space=true", function () {
+        it("must replace comment with white spaces and preserve the suffix", function () {
+            expect(decomment("<!--hello-->text" + LB + "next", {space: true})).toBe("            text" + LB + "next");
+        });
+    });
+
 });

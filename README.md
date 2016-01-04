@@ -65,19 +65,6 @@ about regular expressions.
 If [esprima] fails to validate the code, it will throw a parsing error. When successful,
 this method will remove `//` and `/**/` comments according to the `options` (see below).
 
-##### options.trim ⇒ Boolean
-* `false (default)` - do not trim comments
-* `true` - remove empty lines that follow removed full-line comments
-
-Example:
- 
-```js
-var decomment = require('decomment');
-var code = "/* comment */\r\n\r\n var test = 123"; 
-decomment(code); //=> \r\n var test = 123
-decomment(code, {trim: true}); //=> var test = 123
-```
-
 ##### options.safe ⇒ Boolean
 * `false (default)` - remove all multi-line comments
 * `true` - keep multi-line comments that start with `/*!`
@@ -91,7 +78,38 @@ decomment(code); //=> var a;
 decomment(code, {safe: true}); //=> /*! special */ var a;
 ```
 
-This option has no effect when processing HTML.
+NOTE: This option has no effect when processing HTML.
+
+##### options.space ⇒ Boolean
+* `false (default)` - remove comment blocks entirely
+* `true` - replace comment blocks with white spaces where needed, in order to preserve
+the original line + column position of every element in the `code`.
+
+Example:
+ 
+```js
+var decomment = require('decomment');
+var code = "var a/*text*/, b"; 
+decomment(code); //=> var a, b
+decomment(code, {space: true}); //=> var a        , b
+```
+
+NOTE: When this option is enabled, option `trim` is ignored.
+
+##### options.trim ⇒ Boolean
+* `false (default)` - do not trim comments
+* `true` - remove empty lines that follow removed full-line comments
+
+Example:
+ 
+```js
+var decomment = require('decomment');
+var code = "/* comment */\r\n\r\n var test = 123"; 
+decomment(code); //=> \r\n var test = 123
+decomment(code, {trim: true}); //=> var test = 123
+```
+
+NOTE: This option has no effect when option `space` is enabled.
 
 ### decomment.text(text, [options]) ⇒ String
 
