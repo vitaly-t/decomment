@@ -196,6 +196,7 @@ describe("Multi:", function () {
 
     describe("across lines, with space=true", function () {
         it("must replace deleted lines with line break", function () {
+            expect(decomment("prefix/*comment*/suffix", {space: true})).toBe("prefix           suffix");
             expect(decomment("/*start" + LB + "middle" + LB + "end*/text" + LB, {space: true})).toBe(LB + LB + "     text" + LB);
             expect(decomment("/*start" + LB + "middle" + LB + "end*/\ttext", {space: true})).toBe(LB + LB + "     \ttext");
             expect(decomment("/*start" + LB + "middle" + LB + "end*/", {space: true})).toBe(LB + LB);
