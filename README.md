@@ -33,6 +33,8 @@ var code = "var t; // comments";
 decomment(code); //=> var t;
 ```
 
+For build systems / task runners see [gulp-decomment] and [grunt-decomment].
+
 ## Features
 
 * Removes both single and multi-line comments from JSON, JavaScript and CSS/Text
@@ -143,3 +145,5 @@ Copyright © 2016 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
 [esprima]:https://github.com/jquery/esprima
+[grunt-decomment]:https://github.com/vitaly-t/grunt-decomment
+[gulp-decomment]:https://github.com/vitaly-t/gulp-decomment
