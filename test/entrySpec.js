@@ -4,13 +4,13 @@
 
 var decomment = require('../lib');
 
-describe("Single:", function () {
+describe("Entry:", function () {
 
     describe("non-string input", function () {
         it("must throw an error", function () {
             expect(function () {
                 decomment();
-            }).toThrow(new TypeError("Input code/text/html must be string."));
+            }).toThrow(new TypeError("Input code/text/html must be a string."));
         });
     });
 
