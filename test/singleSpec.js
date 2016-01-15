@@ -138,6 +138,15 @@ describe("Single:", function () {
         });
     });
 
+    describe("with differing line endings", function () {
+        ['\r\n','\r','\n'].forEach(function(LB){
+            it("must be removed and preserve code", function () {
+                expect(decomment("//text" + LB + LB + "end", {trim: true})).toBe("end");
+                expect(decomment("//text" + LB + "\t" + LB + "end", {trim: true})).toBe("end");
+            });
+        });
+    });
+
     describe("inside regEx", function () {
         it("must be ignored", function () {
             expect(decomment("/[a-b//]text/")).toBe("/[a-b//]text/");
