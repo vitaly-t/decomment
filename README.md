@@ -68,6 +68,7 @@ If [esprima] fails to validate the code, it will throw a parsing error. When suc
 this method will remove `//` and `/**/` comments according to the `options` (see below).
 
 ##### options.safe ⇒ Boolean
+
 * `false (default)` - remove all multi-line comments
 * `true` - keep multi-line comments that start with `/*!`
 
@@ -83,6 +84,7 @@ decomment(code, {safe: true}); //=> /*! special */ var a;
 NOTE: This option has no effect when processing HTML.
 
 ##### options.space ⇒ Boolean
+
 * `false (default)` - remove comment blocks entirely
 * `true` - replace comment blocks with white spaces where needed, in order to preserve
 the original line + column position of every code element.
@@ -99,6 +101,7 @@ decomment(code, {space: true}); //=> var a        , b
 NOTE: When this option is enabled, option `trim` is ignored.
 
 ##### options.trim ⇒ Boolean
+
 * `false (default)` - do not trim comments
 * `true` - remove empty lines that follow removed full-line comments
 
@@ -112,6 +115,22 @@ decomment(code, {trim: true}); //=> var test = 123
 ```
 
 NOTE: This option has no effect when option `space` is enabled.
+
+##### options.platform ⇒ String
+
+Overrides the platform settings presumed from the environment.
+
+By default, this library processes line breaks according to the environment OS,
+which this option overrides, according to the value specified:
+
+* `auto` - determine the platform automatically, from the text
+* `unix` - force Unix notation for the line breaks
+* `windows` - force Windows notation for the line breaks 
+
+When `auto` is specified, the source `text` is scanned to determine the platform
+according to the frequency of the line break notations used in the `text`. 
+When it is impossible to determine automatically, the library defaults back to the
+environment-based settings.
 
 ### decomment.text(text, [options]) ⇒ String
 
