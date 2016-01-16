@@ -67,10 +67,11 @@ about regular expressions.
 If [esprima] fails to validate the code, it will throw a parsing error. When successful,
 this method will remove `//` and `/**/` comments according to the `options` (see below).
 
-##### options.safe ⇒ Boolean
+##### options.safe ⇒ Boolean | RegExp
 
 * `false (default)` - remove all multi-line comments
 * `true` - keep multi-line comments that start with `/*!`
+* `RegExp` - provide a matcher for custom safe comment format (example to keep JSDoc use: `/^\/\*\* /`)
 
 Example:
 
