@@ -171,6 +171,24 @@ describe("Multi:", function () {
         });
     });
 
+    describe("with custom safe options", function () {
+        it("must become empty when safe=false", function () {
+            expect(decomment("/** blah haha */")).toBe("");
+        });
+
+        it("must become empty when safe=false", function () {
+            expect(decomment("/*** blah haha */")).toBe("");
+        });
+
+        it("must keep comments when safe is set to matching regex", function () {
+            expect(decomment("/** test this */", {safe: /^\/\*\* /})).toBe("/** test this */");
+        });
+
+        it("must become empty when regex does not match", function () {
+            expect(decomment("/*** test this */", {safe: /^\/\*\* /})).toBe("");
+        });
+    });
+
     describe("combination of options", function () {
         it("must process correctly", function () {
             expect(decomment("/*!special*/" + LB + LB + "code" + LB + "/*normal*/" + LB + LB + "hello" + LB, {
