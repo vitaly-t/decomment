@@ -73,15 +73,17 @@ this method will remove `//` and `/**/` comments according to the `options` (see
 * `true` - keep multi-line comments that start with `/*!`
 * `RegExp` - provide a matcher for custom safe comment format
 
-Example:
+Basic Example:
 
 ```js
 var decomment = require('decomment');
 var code = "/*! special */ var a; /* normal */";
 decomment(code); //=> var a;
 decomment(code, {safe: true}); //=> /*! special */ var a;
+```
 
-//RegExp Example
+RegExp Example:
+```js
 var code = "/** jsDoc style comment */  var a; /* normal */";
 decomment(code); //=> var a;
 decomment(code, {safe: /^\/\*\* /}); //=> /** jsDoc style comment */ var a;
