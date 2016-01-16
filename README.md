@@ -80,6 +80,10 @@ var decomment = require('decomment');
 var code = "/*! special */ var a; /* normal */";
 decomment(code); //=> var a;
 decomment(code, {safe: true}); //=> /*! special */ var a;
+
+//RegExp Example
+var code = "/** jsDoc style comment */  var a; /* normal */";
+decomment(code); //=> var a;
 decomment(code, {safe: /^\/\*\* /}); //=> /** jsDoc style comment */ var a;
 ```
 
