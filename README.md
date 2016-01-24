@@ -71,8 +71,8 @@ this method will remove `//` and `/**/` comments according to the `options` (see
 
 * `false (default)` - remove all multi-line comments
 * `true` - keep special multi-line comments that begin with:
- - `<!--[if` - for conditional comments in HTML;
- - `/*!` - for everything else (other than HTML).
+ - `<!--[if` - for conditional comments in HTML
+ - `/*!` - for everything else (other than HTML)
 
 Example:
 
