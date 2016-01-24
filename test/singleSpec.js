@@ -54,6 +54,13 @@ describe("Single:", function () {
         });
     });
 
+    describe("starting comments suffixed by spaces", function () {
+        it("must remove comment and spaces", function () {
+            expect(decomment(" //hello " + LB + "next")).toBe("next");
+            expect(decomment(" \t //hello \t " + LB + "next")).toBe("next");
+        });
+    });
+
     describe("with line-break suffix", function () {
         var out = decomment("//" + LB);
         it("must return an empty string", function () {
