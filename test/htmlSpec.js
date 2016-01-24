@@ -115,4 +115,26 @@ describe("HTML:", function () {
         });
     });
 
+
+});
+
+describe("HTML-IE", function () {
+
+    describe("Safe", function () {
+        it("must keep all IE comments", function () {
+            expect(decomment("<!--[iftext<![endif]-->", {safe: true})).toBe("<!--[iftext<![endif]-->");
+            expect(decomment("<!--[iftext", {safe: true})).toBe("<!--[iftext");
+            expect(decomment("<!--[if" + LB + "text" + LB + "<![endif]-->", {safe: true})).toBe("<!--[if" + LB + "text" + LB + "<![endif]-->");
+        });
+    });
+
+    describe("Not Safe", function () {
+        it("must delete all IE comments", function () {
+            expect(decomment("<!--[if IE]>text<![endif]-->")).toBe("");
+            expect(decomment("<!--[if IE]>text")).toBe("");
+            expect(decomment("<!--[if IE]>" + LB + "text" + LB + "<![endif]-->")).toBe("");
+            expect(decomment.html(" prefix " + LB + "<!--[if IE]>" + LB + "text" + LB + "<![endif]-->" + " suffix ")).toBe(" prefix " + LB + " suffix ");
+        });
+    });
+
 });

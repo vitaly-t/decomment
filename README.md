@@ -70,7 +70,9 @@ this method will remove `//` and `/**/` comments according to the `options` (see
 ##### options.safe ⇒ Boolean
 
 * `false (default)` - remove all multi-line comments
-* `true` - keep multi-line comments that start with `/*!`
+* `true` - keep special multi-line comments that begin with:
+ - `<!--[if` - for conditional comments in HTML;
+ - `/*!` - for everything else (other than HTML).
 
 Example:
 
@@ -80,8 +82,6 @@ var code = "/*! special */ var a; /* normal */";
 decomment(code); //=> var a;
 decomment(code, {safe: true}); //=> /*! special */ var a;
 ```
-
-NOTE: This option has no effect when processing HTML.
 
 ##### options.space ⇒ Boolean
 
