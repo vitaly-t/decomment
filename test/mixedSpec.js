@@ -54,4 +54,21 @@ describe("Mixed:", function () {
         });
     });
 
+    describe("Automatic EOL", function () {
+
+        it("must always ignore solo \\r symbols", function () {
+            expect(decomment("//comment\r\rtext", {trim: true})).toBe("");
+            expect(decomment("/*comment*/\r\rtext", {trim: true})).toBe("\r\rtext");
+        });
+        it("must determine Unix and break on \\n", function () {
+            expect(decomment("//comment\n\ntext", {trim: true})).toBe("text");
+            expect(decomment("/*comment*/\n\ntext", {trim: true})).toBe("text");
+        });
+        it("must determine Windows and break on \\r\\n", function () {
+            expect(decomment("//comment\r\n\r\ntext", {trim: true})).toBe("text");
+            expect(decomment("/*comment*/\r\n\r\ntext", {trim: true})).toBe("text");
+        });
+
+    });
+
 });

@@ -116,22 +116,6 @@ decomment(code, {trim: true}); //=> var test = 123
 
 NOTE: This option has no effect when option `space` is enabled.
 
-##### options.platform ⇒ String
-
-Overrides the environment platform settings.
-
-By default, this library processes line breaks according to the environment OS,
-which this option overrides, according to the value specified:
-
-* `auto` - determine the platform automatically from the text
-* `unix` - force Unix notation for the line breaks
-* `windows` - force Windows notation for the line breaks 
-
-When `auto` is specified, `text` is scanned to determine the platform
-according to the frequency of the line break notations used in it. 
-When it is impossible to determine automatically, the library defaults
-back to the environment-based settings.
-
 ### decomment.text(text, [options]) ⇒ String
 
 Unlike the default **decomment**, it instructs the library that `text` is not a JSON,
