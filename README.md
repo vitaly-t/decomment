@@ -89,17 +89,17 @@ Takes either a single or an array of regular expressions to match against.
 
 All matching blocks are ignored, as well as any comment-like content inside them.
 
-Practical cases where you may need to use it:
+A few practical cases of using this option are shown below.
 
-* When removing comments from CSS that contains Base64-encoded strings you may run into something like this:
+* CSS may contain Base64-encoded strings with comment-like symbols:
 ```css
   src: url(data:font/woff;charset=utf-8;base64,d09GRg//ABAAAAAAZ)
 ```
-  i.e. comment-like symbols may appear inside Base64-encoded strings. You can isolate all `url(*)` blocks by setting:
+  You can isolate all `url(*)` blocks by setting:
 ```js
   {ignore: /url\([\w\s:\/=\-\+;,]*\)/g}
 ```
-* If you want to preserve jsDoc-like comments inside JavaScript, you can locate all special blocks `/** content */` with this:
+* To preserve jsDoc blocks `/** content */` inside JavaScript, you can use:
 ```js
   {ignore: /\/\*\*[\w\s]*\*\//g}
 ```
