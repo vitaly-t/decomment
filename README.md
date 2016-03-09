@@ -92,7 +92,7 @@ All matching blocks are ignored, as well as any comment-like content inside them
 Practical cases where you may need to use it:
 * When removing comments from CSS that contains Base64-encoded strings you may run into
   something like this:
-  ```css
+  ```js
   src: url(data:font/woff;charset=utf-8;base64,d09GRg//ABAAAAAAZ)
   ```,
   i.e. comment-like symbols may appear inside Base64-encoded strings. You can isolate all
