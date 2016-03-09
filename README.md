@@ -83,6 +83,20 @@ decomment(code); //=> var a;
 decomment(code, {safe: true}); //=> /*! special */ var a;
 ```
 
+##### options.ignore ⇒ RegExp | [RegExp,...]
+
+Takes either a single or an array of regular expressions to match against. 
+
+All matching blocks are ignored, as well as any comment-like content inside them.
+
+Practical cases where you may need to use it:
+* When removing comments from CSS that contains Base64-encoded strings you may run into
+  something like this: `src: url(data:font/woff;charset=utf-8;base64,d09GRg//ABAAAAAAZ)`,
+  i.e. comment-like symbols may appear inside Base64-encoded strings. You can isolate all
+  `url(*)` blocks by setting `{ignore: /url\([\w\s:\/=\-\+;,]*\)/g}`
+* If you want to preserve jsDoc-like comments inside JavaScript, you can locate all special
+  blocks `/** content */` with this: `{ignore: /\/\*\*[\w\s]*\*\//g}`
+
 ##### options.space ⇒ Boolean
 
 * `false (default)` - remove comment blocks entirely

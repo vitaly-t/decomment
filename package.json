@@ -1,6 +1,6 @@
 {
   "name": "decomment",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Removes comments from JSON, JavaScript, CSS, HTML, etc.",
   "main": "lib/index.js",
   "scripts": {
