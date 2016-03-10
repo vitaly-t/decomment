@@ -89,19 +89,15 @@ Takes either a single or an array of regular expressions to match against.
 
 All matching blocks are ignored, as well as any comment-like content inside them.
 
-A few practical cases of using this option are shown below.
+Example:
 
-* CSS may contain Base64-encoded strings with comment-like symbols:
+CSS may contain Base64-encoded strings with comment-like symbols:
 ```css
-  src: url(data:font/woff;charset=utf-8;base64,d09GRg//ABAAAAAAZ)
+  src: url(data:font/woff;base64,d09GRg//ABAAAAAAZ)
 ```
-  You can isolate all `url(*)` blocks by setting:
+And you can isolate all `url(*)` blocks by setting:
 ```js
   {ignore: /url\([\w\s:\/=\-\+;,]*\)/g}
-```
-* To preserve jsDoc blocks `/** content */` inside JavaScript, you can use:
-```js
-  {ignore: /\/\*\*[\w\s]*\*\//g}
 ```
 
 ##### options.space ⇒ Boolean

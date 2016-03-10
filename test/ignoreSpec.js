@@ -67,6 +67,7 @@ describe("Ignore:", function () {
             'but ignore this' + LB +
             '*/';
 
+        // This is not a real regExp for jsDoc, a much simpler version for the test;
         expect(decomment(input, {ignore: /\/\*\*[\w\s]*\*\//g})).toBe(output);
     });
 
