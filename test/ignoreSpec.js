@@ -53,6 +53,7 @@ describe("Ignore:", function () {
             '-->';
 
         expect(decomment.html(input, {ignore: /<!--keep[\w\s]*-->/g})).toBe(output);
+        expect(decomment.html(" <!--keep-->", {ignore: /<!--keep[\w\s]*-->/g})).toBe(" <!--keep-->");
     });
 
     describe("jsDoc", function () {
@@ -67,8 +68,15 @@ describe("Ignore:", function () {
             'but ignore this' + LB +
             '*/';
 
-        // This is not a real regExp for jsDoc, a much simpler version for the test;
-        expect(decomment(input, {ignore: /\/\*\*[\w\s]*\*\//g})).toBe(output);
+        var regEx = /\/\*\*([^\*]*(\*[^\/])?)*\*\//g;
+
+        expect(decomment(input, {ignore: regEx})).toBe(output);
+        expect(decomment(" /** text */", {ignore: regEx})).toBe(" /** text */");
+    });
+
+    describe("one-line", function () {
+        expect(decomment("//comment", {ignore: /\/\/\w*/})).toBe("//comment");
+        expect(decomment(" //comment", {ignore: /\/\/\w*/})).toBe(" //comment");
     });
 
 });
