@@ -68,10 +68,10 @@ describe("Ignore:", function () {
             'but ignore this' + LB +
             '*/';
 
-        var regEx = /\/\*\*([^\*]*(\*[^\/])?)*\*\//g;
+        var regEx = /\/\*\*\s*\n([^\*]*(\*[^\/])?)*\*\//g;
 
         expect(decomment(input, {ignore: regEx})).toBe(output);
-        expect(decomment(" /** text */", {ignore: regEx})).toBe(" /** text */");
+        expect(decomment(" /**" + LB + "text */", {ignore: regEx})).toBe(" /**" + LB + "text */");
     });
 
     describe("one-line", function () {

@@ -50,22 +50,21 @@ Once the input code is recognized as HTML, only the HTML comments will be remove
 
 For JSON and JavaScript this library uses [esprima] to guarantee correct processing for regular expressions.
 
-As an example, it can process [AngularJS 1.5 Core](https://code.angularjs.org/1.5.0-rc.0/angular.js)
+As an example, it can process [AngularJS 1.5 Core](https://code.angularjs.org/1.5.0/angular.js)
 in under 100ms, which is 1.1MB ~ 30,000 lines of JavaScript.   
 
 ## API
 
 ### decomment(code, [options]) ⇒ String
 
-This method first checks if the code starts with `<`, as an HTML, and if so,
-all `<!-- comment -->` entries are removed, according to the `options`.
+This method first checks if the code starts with `<`, as an HTML, and if so, all `<!-- comment -->` entries
+are removed, according to the `options`.
 
-When the `code` is not recognized as HTML, it is assumed to be either JSON or JavaScript.
-It is then parsed through [esprima] for ECMAScript 6 compliance, and to extract details
-about regular expressions.
+When the `code` is not recognized as HTML, it is assumed to be either JSON or JavaScript. It is then parsed
+through [esprima] for ECMAScript 6 compliance, and to extract details about regular expressions.
 
-If [esprima] fails to validate the code, it will throw a parsing error. When successful,
-this method will remove `//` and `/**/` comments according to the `options` (see below).
+If [esprima] fails to validate the code, it will throw a parsing error. When successful, this method will remove
+`//` and `/**/` comments according to the `options` (see below).
 
 ##### options.safe ⇒ Boolean
 
@@ -99,10 +98,11 @@ You can isolate all `url(*)` blocks by using:
 ```js
   {ignore: /url\([\w\s:\/=\-\+;,]*\)/g}
 ```
-* If you want to isolate all jsDoc blocks, you can use the following:
+* If you want to isolate jsDoc blocks (start with `/**`, followed by a line break, end with `*/`),
+you can use the following:
 ```js
-{ignore: /\/\*\*([^\*]*(\*[^\/])?)*\*\//g}
-```
+{ignore: /\/\*\*\s*\n([^\*]*(\*[^\/])?)*\*\//g}
+``` 
 
 ##### options.space ⇒ Boolean
 
