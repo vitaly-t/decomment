@@ -85,8 +85,7 @@ decomment(code, {safe: true}); //=> /*! special */ var a;
 ##### options.ignore ⇒ RegExp | [RegExp,...]
 
 Takes either a single or an array of regular expressions to match against. 
-
-All matching blocks are ignored, as well as any comment-like content inside them.
+All matching blocks are then skipped, as well as any comment-like content inside them.
 
 Examples:
 
