@@ -162,6 +162,16 @@ Unlike the default **decomment** method, it instructs the library not to parse
 or validate the input in any way, rather assume it to be HTML, and remove all
 `<!-- comment -->` entries from it according to the `options`.
 
+### decomment.getEOL(text) ⇒ String
+
+Returns End-of-Line string used within the `text`, based on the occurrence frequency:
+
+* `\n` - for Unix-encoded text
+* `\r\n` - for Windows-encoded text 
+
+When impossible to conclude (occurrence for both is either the same or 0), it returns
+the default End-of-Line for the current OS.
+
 ## License
 
 Copyright © 2016 [Vitaly Tomilov](https://github.com/vitaly-t);
