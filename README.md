@@ -1,7 +1,7 @@
 decomment
 =========
 
-Removes comments from JSON, JavaScript, CSS, HTML, etc.
+Removes comments from JSON/JavaScript, CSS/HTML, CPP/H, etc.
 
 [![Build Status](https://travis-ci.org/vitaly-t/decomment.svg?branch=master)](https://travis-ci.org/vitaly-t/decomment)
 [![Coverage Status](https://coveralls.io/repos/vitaly-t/decomment/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/decomment?branch=master)
@@ -169,8 +169,8 @@ Returns End-of-Line string used within the `text`, based on the occurrence frequ
 * `\n` - for Unix-encoded text
 * `\r\n` - for Windows-encoded text 
 
-When impossible to conclude (occurrence for both is either the same or 0), it returns
-the default End-of-Line for the current OS.
+When impossible to conclude (the same or 0 occurrence), it returns the default End-of-Line
+for the current OS.
 
 ## License
 
