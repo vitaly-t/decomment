@@ -41,7 +41,7 @@
     "npm": ">=1.4"
   },
   "dependencies": {
-    "esprima": "2.7"
+    "acorn": "^3.0.4"
   },
   "devDependencies": {
     "coveralls": "2.x",
