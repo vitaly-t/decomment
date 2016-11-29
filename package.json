@@ -1,6 +1,6 @@
 {
   "name": "decomment",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Removes comments from JSON/JavaScript, CSS/HTML, CPP/H, etc.",
   "main": "lib/index.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "npm": ">=1.4"
   },
   "dependencies": {
-    "esprima": "2.7"
+    "esprima": "3.1"
   },
   "devDependencies": {
     "coveralls": "2.x",
