@@ -2,9 +2,9 @@
 
 // Tests for extra utilities;
 
-var decomment = require('../lib');
-var os = require('os');
-var LB = os.EOL;
+const decomment = require('../lib');
+const os = require('os');
+const LB = os.EOL;
 
 describe('Utils/Positive:', function () {
 

@@ -2,9 +2,9 @@
 
 // Tests for any text file;
 
-var decomment = require('../lib').text;
-var os = require('os');
-var LB = os.EOL;
+const decomment = require('../lib').text;
+const os = require('os');
+const LB = os.EOL;
 
 describe('Text:', function () {
 

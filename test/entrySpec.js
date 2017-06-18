@@ -2,7 +2,7 @@
 
 // Entry tests;
 
-var decomment = require('../lib');
+const decomment = require('../lib');
 
 describe('Entry:', function () {
 
