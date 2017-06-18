@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint-disable */
+
 // Tests for 'ignore' option;
 
 var decomment = require('../lib');

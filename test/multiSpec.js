@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint-disable */
+
 // Tests for multi-line comments;
 
 var decomment = require('../lib');

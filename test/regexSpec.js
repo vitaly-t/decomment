@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint-disable */
+
 // Tests for skipping regular expressions;
 
 var decomment = require('../lib');
