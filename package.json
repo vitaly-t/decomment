@@ -1,12 +1,13 @@
 {
   "name": "decomment",
-  "version": "0.8.7",
+  "version": "0.8.8",
   "description": "Removes comments from JSON/JavaScript, CSS/HTML, CPP/H, etc.",
   "main": "lib/index.js",
   "scripts": {
     "test": "jasmine-node test",
     "coverage": "istanbul cover ./node_modules/jasmine-node/bin/jasmine-node test",
-    "travis": "istanbul cover ./node_modules/jasmine-node/bin/jasmine-node test --captureExceptions && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "travis": "npm run lint && istanbul cover ./node_modules/jasmine-node/bin/jasmine-node test --captureExceptions && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "lint": "./node_modules/.bin/eslint ./lib"
   },
   "files": [
     "lib",
@@ -41,10 +42,11 @@
     "npm": ">=1.4"
   },
   "dependencies": {
-    "esprima": "3.1"
+    "esprima": "^4.0.0"
   },
   "devDependencies": {
-    "coveralls": "2.x",
+    "coveralls": "2.11",
+    "eslint": "^4.0.0",
     "istanbul": "0.4",
     "jasmine-node": "1.x"
   }

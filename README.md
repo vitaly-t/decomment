@@ -20,6 +20,7 @@ $ npm test
 ```
 
 Testing with coverage:
+
 ```
 $ npm run coverage
 ```
@@ -29,7 +30,7 @@ $ npm run coverage
 ```js
 var decomment = require('decomment');
 
-var code = "var t; // comments";
+var code = 'var t; // comments';
 
 decomment(code); //=> var t;
 ```
@@ -78,7 +79,7 @@ Example:
 
 ```js
 var decomment = require('decomment');
-var code = "/*! special */ var a; /* normal */";
+var code = '/*! special */ var a; /* normal */';
 decomment(code); //=> var a;
 decomment(code, {safe: true}); //=> /*! special */ var a;
 ```
@@ -91,15 +92,20 @@ All matching blocks are then skipped, as well as any comment-like content inside
 Examples:
 
 * CSS may contain Base64-encoded strings with comment-like symbols:
+
 ```css
   src: url(data:font/woff;base64,d09GRg//ABAAAAAAZ)
 ```
+
 You can isolate all `url(*)` blocks by using:
+
 ```js
   {ignore: /url\([\w\s:\/=\-\+;,]*\)/g}
 ```
+
 * If you want to isolate jsDoc blocks (start with `/**`, followed by a line break, end with `*/`),
 you can use the following:
+
 ```js
 {ignore: /\/\*\*\s*\n([^\*]*(\*[^\/])?)*\*\//g}
 ``` 
@@ -114,7 +120,7 @@ Example:
  
 ```js
 var decomment = require('decomment');
-var code = "var a/*text*/, b"; 
+var code = 'var a/*text*/, b'; 
 decomment(code); //=> var a, b
 decomment(code, {space: true}); //=> var a        , b
 ```
@@ -130,7 +136,7 @@ Example:
  
 ```js
 var decomment = require('decomment');
-var code = "/* comment */\r\n\r\n var test = 123"; 
+var code = '/* comment */\r\n\r\n var test = 123'; 
 decomment(code); //=> \r\n var test = 123
 decomment(code, {trim: true}); //=> var test = 123
 ```
@@ -150,7 +156,7 @@ Example:
 
 ```js
 var decomment = require('decomment');
-var text = ".my-class{color:Red;}// comments";
+var text = '.my-class{color:Red;}// comments';
 decomment.text(text); //=> .my-class{color:Red;}
 ```
 
@@ -175,7 +181,7 @@ for the current OS.
 
 ## License
 
-Copyright © 2016 [Vitaly Tomilov](https://github.com/vitaly-t);
+Copyright © 2017 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
 [esprima]:https://github.com/jquery/esprima
