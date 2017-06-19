@@ -190,6 +190,7 @@ describe('Multi:', function () {
         it('must delete all lines', function () {
             expect(decomment('/*start' + LB + 'middle' + LB + 'end*/')).toBe('');
             expect(decomment('/*start' + LB + 'middle' + LB + 'end*/text')).toBe('text');
+            // TODO: This one seems invalid, should expect 'prefix- suffix', to avoid code fusion
             expect(decomment('prefix-/*start' + LB + 'middle' + LB + 'end*/suffix')).toBe('prefix-suffix');
         });
     });
@@ -205,4 +206,18 @@ describe('Multi:', function () {
         });
     });
 
+    // TODO: Code needs to be amended for these tests to pass:
+    /*
+    describe('when code is joined by comment on the same line', () => {
+        it('must not fuse the code', () => {
+            expect(decomment('var/*comment*\/name;')).toBe('var name;');
+        });
+    });
+
+    describe('when code is joined by comment across lines', () => {
+        it('must not fuse the code', () => {
+            expect(decomment('var/*multi' + LB + 'line*\/name;')).toBe('var name;');
+        });
+    });
+    */
 });
