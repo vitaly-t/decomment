@@ -72,8 +72,8 @@ If [esprima] fails to validate the code, it will throw a parsing error. When suc
 
 * `false (default)` - remove all multi-line comments
 * `true` - keep special multi-line comments that begin with:
- - `<!--[if` - for conditional comments in HTML
- - `/*!` - for everything else (other than HTML)
+  - `<!--[if` - for conditional comments in HTML
+  - `/*!` - for everything else (other than HTML)
 
 Example:
 
