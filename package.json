@@ -42,11 +42,11 @@
     "npm": ">=2.15"
   },
   "dependencies": {
-    "esprima": "^4.0.0"
+    "esprima": "~4.0.0"
   },
   "devDependencies": {
     "coveralls": "~2.11.16",
-    "eslint": "~4.4.1",
+    "eslint": "~4.7.0",
     "istanbul": "~0.4.5",
     "jasmine-node": "~1.14.5"
   }
