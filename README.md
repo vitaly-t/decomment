@@ -107,7 +107,7 @@ You can isolate all `url(*)` blocks by using:
 you can use the following:
 
 ```js
-{ignore: /\/\*\*\s*\n([^\*]*(\*[^\/])?)*\*\//g}
+{ignore: /\/\*\*\s*\n([^\*]|(\*(?!\/)))*\*\//g}
 ``` 
 
 ##### options.space ⇒ Boolean
