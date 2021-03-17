@@ -53,7 +53,7 @@ Once the input code is recognized as HTML, only the HTML comments will be remove
 For JSON and JavaScript this library uses [esprima] to guarantee correct processing for regular expressions.
 
 As an example, it can process [AngularJS 1.5 Core](https://code.angularjs.org/1.5.0/angular.js)
-in under 100ms, which is 1.1MB ~ 30,000 lines of JavaScript.   
+in under 100ms, which is 1.1MB ~ 30,000 lines of JavaScript.
 
 ## API
 
@@ -86,7 +86,7 @@ decomment(code, {safe: true}); //=> /*! special */ var a;
 
 ##### options.ignore ⇒ RegExp | [RegExp,...]
 
-Takes either a single or an array of regular expressions to match against. 
+Takes either a single or an array of regular expressions to match against.
 All matching blocks are then skipped, as well as any comment-like content inside them.
 
 Examples:
@@ -108,7 +108,7 @@ you can use the following:
 
 ```js
 {ignore: /\/\*\*\s*\n([^\*]|(\*(?!\/)))*\*\//g}
-``` 
+```
 
 ##### options.space ⇒ Boolean
 
@@ -117,10 +117,10 @@ you can use the following:
 the original line + column position of every code element.
 
 Example:
- 
+
 ```js
 var decomment = require('decomment');
-var code = 'var a/*text*/, b'; 
+var code = 'var a/*text*/, b';
 decomment(code); //=> var a, b
 decomment(code, {space: true}); //=> var a        , b
 ```
@@ -133,15 +133,29 @@ NOTE: When this option is enabled, option `trim` is ignored.
 * `true` - remove empty lines that follow removed full-line comments
 
 Example:
- 
+
 ```js
 var decomment = require('decomment');
-var code = '/* comment */\r\n\r\n var test = 123'; 
+var code = '/* comment */\r\n\r\n var test = 123';
 decomment(code); //=> \r\n var test = 123
 decomment(code, {trim: true}); //=> var test = 123
 ```
 
 NOTE: This option has no effect when option `space` is enabled.
+
+##### options.tolerant ⇒ Boolean
+
+* `false (default)` - perform strict JavaScript parsing (parser throws an exception if given input is not represent a valid JavaScript)
+* `true` - pass 'tolerant' flag to [esprima] parser (with the tolerant mode, the parser _may_ choose to continue parsing and produce a syntax tree). Usefull for parsing for ex. Angular\TypeScript code
+
+Example:
+
+```js
+var decomment = require('decomment');
+var code = '/* comment */\r\n\r\n@Injectable()\r\nexport class HeroService {}';
+decomment(code); //=> Error: 'Unexpected token ILLEGAL'
+decomment(code, {tolerant: true}); //=> @Injectable()\r\nexport class HeroService {}
+```
 
 ### decomment.text(text, [options]) ⇒ String
 
@@ -174,7 +188,7 @@ or validate the input in any way, rather assume it to be HTML, and remove all
 Returns End-of-Line string used within the `text`, based on the occurrence frequency:
 
 * `\n` - for Unix-encoded text
-* `\r\n` - for Windows-encoded text 
+* `\r\n` - for Windows-encoded text
 
 When impossible to conclude (the same or 0 occurrence), it returns the default End-of-Line
 for the current OS.

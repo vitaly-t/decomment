@@ -27,4 +27,10 @@ describe('Entry:', function () {
             expect(decomment('')).toBe('');
         });
     });
+
+    describe('tolerant mode', function () {
+        it('must parse in tolerant mode', function () {
+            expect(decomment('/* comment */@Injectable() export class HeroService {}', {tolerant: true})).toBe('@Injectable() export class HeroService {}');
+        });
+    });
 });
