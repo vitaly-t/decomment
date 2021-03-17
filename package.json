@@ -1,6 +1,6 @@
 {
   "name": "decomment",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "Removes comments from JSON/JavaScript, CSS/HTML, CPP/H, etc.",
   "main": "lib/index.js",
   "scripts": {
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "coveralls": "3.1.0",
-    "eslint": "7.5.0",
+    "eslint": "7.22.0",
     "istanbul": "0.4.5",
     "jasmine-node": "3.0.0"
   }
