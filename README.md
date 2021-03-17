@@ -10,7 +10,7 @@ Removes comments from JSON/JavaScript, CSS/HTML, CPP/H, etc.
 ## Installing
 
 ```
-$ npm install decomment
+$ npm i decomment
 ```
 
 ## Testing
@@ -28,9 +28,9 @@ $ npm run coverage
 ## Usage
 
 ```js
-var decomment = require('decomment');
+const decomment = require('decomment');
 
-var code = 'var t; // comments';
+const code = 'var t; // comments';
 
 decomment(code); //=> var t;
 ```
@@ -78,8 +78,8 @@ If [esprima] fails to validate the code, it will throw a parsing error. When suc
 Example:
 
 ```js
-var decomment = require('decomment');
-var code = '/*! special */ var a; /* normal */';
+const decomment = require('decomment');
+const code = '/*! special */ var a; /* normal */';
 decomment(code); //=> var a;
 decomment(code, {safe: true}); //=> /*! special */ var a;
 ```
@@ -119,8 +119,8 @@ the original line + column position of every code element.
 Example:
 
 ```js
-var decomment = require('decomment');
-var code = 'var a/*text*/, b';
+const decomment = require('decomment');
+const code = 'var a/*text*/, b';
 decomment(code); //=> var a, b
 decomment(code, {space: true}); //=> var a        , b
 ```
@@ -135,8 +135,8 @@ NOTE: When this option is enabled, option `trim` is ignored.
 Example:
 
 ```js
-var decomment = require('decomment');
-var code = '/* comment */\r\n\r\n var test = 123';
+const decomment = require('decomment');
+const code = '/* comment */\r\n\r\n var test = 123';
 decomment(code); //=> \r\n var test = 123
 decomment(code, {trim: true}); //=> var test = 123
 ```
@@ -145,14 +145,15 @@ NOTE: This option has no effect when option `space` is enabled.
 
 ##### options.tolerant ⇒ Boolean
 
-* `false (default)` - perform strict JavaScript parsing (parser throws an exception if given input is not represent a valid JavaScript)
-* `true` - pass 'tolerant' flag to [esprima] parser (with the tolerant mode, the parser _may_ choose to continue parsing and produce a syntax tree). Usefull for parsing for ex. Angular\TypeScript code
+* `false (default)` - perform strict JavaScript parsing (parser throws on invalid JavaScript)
+* `true` - pass `tolerant` flag to [esprima] parser (the parser _may_ choose to continue parsing and produce a syntax tree).
+  Usefull for parsing Angular/TypeScript code, for example.
 
 Example:
 
 ```js
-var decomment = require('decomment');
-var code = '/* comment */\r\n\r\n@Injectable()\r\nexport class HeroService {}';
+const decomment = require('decomment');
+const code = '/* comment */\r\n\r\n@Injectable()\r\nexport class HeroService {}';
 decomment(code); //=> Error: 'Unexpected token ILLEGAL'
 decomment(code, {tolerant: true}); //=> @Injectable()\r\nexport class HeroService {}
 ```
@@ -169,8 +170,8 @@ such as: `.CSS`, `.CPP`, `.H`, etc.
 Example:
 
 ```js
-var decomment = require('decomment');
-var text = '.my-class{color:Red;}// comments';
+const decomment = require('decomment');
+const text = '.my-class{color:Red;}// comments';
 decomment.text(text); //=> .my-class{color:Red;}
 ```
 
@@ -195,7 +196,7 @@ for the current OS.
 
 ## License
 
-Copyright © 2017 [Vitaly Tomilov](https://github.com/vitaly-t);
+Copyright © 2021 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
 [esprima]:https://github.com/jquery/esprima
