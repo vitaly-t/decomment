@@ -3,10 +3,6 @@ decomment
 
 Removes comments from JSON/JavaScript, CSS/HTML, CPP/H, etc.
 
-[![Build Status](https://travis-ci.org/vitaly-t/decomment.svg?branch=master)](https://travis-ci.org/vitaly-t/decomment)
-[![Coverage Status](https://coveralls.io/repos/vitaly-t/decomment/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/decomment?branch=master)
-[![Downloads Count](http://img.shields.io/npm/dm/decomment.svg)](https://www.npmjs.com/package/decomment)
-
 ## Installing
 
 ```
